@@ -98,7 +98,7 @@ class DFJKOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return  FlxG.save.data.dfjk ? "DFJK" : "WASD";
+		return  FlxG.save.data.dfjk ? "CURRENT KEYBINDS DFJK" : "CURRENT KEYBINDS WASD";
 	}
 }
 
@@ -140,7 +140,7 @@ class GhostTapOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return FlxG.save.data.ghost ? "Ghost Tapping" : "No Ghost Tapping";
+		return FlxG.save.data.ghost ? "Old Input" : "New Input";
 	}
 }
 
@@ -160,7 +160,7 @@ class AccuracyOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Accuracy " + (!FlxG.save.data.accuracyDisplay ? "off" : "on");
+		return "Score Text" + (!FlxG.save.data.accuracyDisplay ? " ORIGINAL" : " KADE ENGINE");
 	}
 }
 
@@ -180,7 +180,7 @@ class SongPositionOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "Song Position " + (!FlxG.save.data.songPosition ? "off" : "on");
+		return "Song Position Display " + (!FlxG.save.data.songPosition ? "off" : "on");
 	}
 }
 
@@ -446,7 +446,7 @@ class RainbowFPSOption extends Option
 
 	private override function updateDisplay():String
 	{
-		return "FPS Rainbow " + (!FlxG.save.data.fpsRain ? "off" : "on");
+		return "Rainbow FPS " + (!FlxG.save.data.fpsRain ? "off" : "on");
 	}
 }
 
