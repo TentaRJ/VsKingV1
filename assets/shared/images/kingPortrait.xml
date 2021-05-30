@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="kingPortrait.png">
+	<!-- Created with Adobe Animate version 20.0.3.25487 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="kingManifestingTalk0000" x="0" y="0" width="332" height="246" frameX="0" frameY="-4" frameWidth="334" frameHeight="250"/>
+	<SubTexture name="kingManifestingTalk0001" x="332" y="0" width="331" height="248" frameX="0" frameY="-2" frameWidth="334" frameHeight="250"/>
+	<SubTexture name="kingManifestingTalk0002" x="663" y="0" width="334" height="250"/>
+	<SubTexture name="kingManifestingTalk0003" x="663" y="0" width="334" height="250"/>
+	<SubTexture name="kingPortalTalk0000" x="997" y="0" width="316" height="255" frameX="0" frameY="0" frameWidth="319" frameHeight="286"/>
+	<SubTexture name="kingPortalTalk0001" x="1313" y="0" width="319" height="284" frameX="0" frameY="-2" frameWidth="319" frameHeight="286"/>
+	<SubTexture name="kingPortalTalk0002" x="1632" y="0" width="317" height="266" frameX="0" frameY="0" frameWidth="319" frameHeight="286"/>
+	<SubTexture name="kingPortalTalk0003" x="1632" y="0" width="317" height="266" frameX="0" frameY="0" frameWidth="319" frameHeight="286"/>
+	<SubTexture name="kingStressTalk0000" x="0" y="284" width="324" height="246" frameX="0" frameY="-4" frameWidth="326" frameHeight="250"/>
+	<SubTexture name="kingStressTalk0001" x="324" y="284" width="323" height="248" frameX="0" frameY="-2" frameWidth="326" frameHeight="250"/>
+	<SubTexture name="kingStressTalk0002" x="647" y="284" width="326" height="250"/>
+	<SubTexture name="kingStressTalk0003" x="647" y="284" width="326" height="250"/>
+	<SubTexture name="kingTalk0000" x="973" y="284" width="334" height="246" frameX="0" frameY="-4" frameWidth="0" frameHeight="250"/>
+	<SubTexture name="kingTalk0001" x="1307" y="284" width="333" height="248" frameX="0" frameY="-2" frameWidth="0" frameHeight="250"/>
+	<SubTexture name="kingTalk0002" x="1640" y="284" width="336" height="250"/>
+	<SubTexture name="kingTalk0003" x="1640" y="284" width="336" height="250"/>
+</TextureAtlas>
