@@ -3376,6 +3376,14 @@ class PlayState extends MusicBeatState
 	override function stepHit()
 	{
 		super.stepHit();
+
+		if (curStep == 640 && curSong == 'Limbo')
+			{
+				remove(dad);
+				dad = new Character(150, 390, 'king');
+				add(dad);
+			}
+		
 		if (FlxG.sound.music.time > Conductor.songPosition + 20 || FlxG.sound.music.time < Conductor.songPosition - 20)
 		{
 			resyncVocals();
