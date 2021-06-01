@@ -51,6 +51,7 @@ jobs:
           haxelib install hxcpp-debug-server
           haxelib install actuate
           haxelib git extension-webm https://github.com/GrowtopiaFli/extension-webm
+          haxelib install linc_luajit
           lime rebuild extension-webm linux
           haxelib list
       - name: Create APIStuff
@@ -96,6 +97,7 @@ jobs:
           haxelib install hxcpp-debug-server
           haxelib install actuate
           haxelib git extension-webm https://github.com/GrowtopiaFli/extension-webm
+          haxelib install linc_luajit
           lime rebuild extension-webm windows
           haxelib list
         shell: cmd
@@ -139,6 +141,7 @@ jobs:
           haxelib install hxcpp-debug-server
           haxelib install actuate
           haxelib git extension-webm https://github.com/GrowtopiaFli/extension-webm
+          haxelib install linc_luajit
           lime rebuild extension-webm mac
           haxelib list
       - name: Create APIStuff

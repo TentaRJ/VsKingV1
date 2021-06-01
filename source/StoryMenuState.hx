@@ -292,14 +292,17 @@ class StoryMenuState extends MusicBeatState
 			PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + diffic, PlayState.storyPlaylist[0].toLowerCase());
 			PlayState.storyWeek = curWeek;
 			PlayState.campaignScore = 0;
+			trace(curWeek);
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
-				if (PlayState.storyPlaylist[0].toLowerCase() == 'empty')
+				if (curWeek == 1)
 				{
-					FlxG.switchState(new VideoState(Paths.video('intro', 'weekcustom'), new PlayState()));
+					trace("Come on load the video");
+					FlxG.switchState(new VideoState("assets/videos/intro.webm", new PlayState()));
 				}
 				else
 				{
+					trace('Haha no :)');
 					LoadingState.loadAndSwitchState(new PlayState(), true);
 				}
 			});
