@@ -29,13 +29,17 @@ class StoryMenuState extends MusicBeatState
 		['Portal']
 	];
 	var curDifficulty:Int = 1;
-
-	public static var weekUnlocked:Array<Bool> = [true, true];
+	
+	#if debug
+	public static var weekUnlocked:Array<Bool> = [true, true, true];
+	#else
+	public static var weekUnlocked:Array<Bool> = [true, true, false];
+	#end
 
 	var weekCharacters:Array<Dynamic> = [
 		['', 'bf', 'gf'],
 		['king', 'bf', 'gf'],
-		['blackout', 'bf', 'gf'],
+		['portal', 'bf', 'gf'],
 	];
 
 	var weekNames:Array<String> = [
@@ -265,7 +269,7 @@ class StoryMenuState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('confirmMenu'));
 
 				grpWeekText.members[curWeek].startFlashing();
-				grpWeekCharacters.members[1].animation.play('bfConfirm');
+				// grpWeekCharacters.members[1].animation.play('bfConfirm');
 				stopspamming = true;
 			}
 
@@ -290,7 +294,14 @@ class StoryMenuState extends MusicBeatState
 			PlayState.campaignScore = 0;
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
-				LoadingState.loadAndSwitchState(new PlayState(), true);
+				if (PlayState.storyPlaylist[0].toLowerCase() == 'empty')
+				{
+					FlxG.switchState(new VideoState(Paths.video('intro', 'weekcustom'), new PlayState()));
+				}
+				else
+				{
+					LoadingState.loadAndSwitchState(new PlayState(), true);
+				}
 			});
 		}
 	}
