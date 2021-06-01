@@ -366,8 +366,6 @@ class PlayState extends MusicBeatState
 			// }
 			case 'limbo': 
 					{
-					curStage = 'limbo';
-
 					var bg:FlxSprite = new FlxSprite(-100).loadGraphic(Paths.image('limbo/sky', 'weekcustom'));
 					bg.scrollFactor.set(0.1, 0.1);
 					add(bg);
@@ -386,8 +384,6 @@ class PlayState extends MusicBeatState
 			}
 			case 'hell': 
 					{
-					curStage = 'hell';
-
 					var bg:FlxSprite = new FlxSprite(-100).loadGraphic(Paths.image('hell/sky', 'weekcustom'));
 					bg.scrollFactor.set(0.1, 0.1);
 					add(bg);
@@ -1633,6 +1629,43 @@ class PlayState extends MusicBeatState
 
 			strumLineNotes.add(babyArrow);
 		}
+	}
+
+	public function switchCharacter(change:String = "pico", isdad:Bool = true, ?healthIconChange:Bool=false, ?effect:Bool=false)
+	{
+		var cordx:Float;
+		var cordy:Float;
+		trace("Lets home this doesn't crash :)");
+		if (isdad){
+			cordx = dad.x;
+			cordy = dad.y;
+			trace("x"+ cordx + "\ny" + cordy);
+		}
+		else{
+			cordx = boyfriend.x;
+			cordy = boyfriend.y;
+			trace("x"+ cordx + "\ny" + cordy);
+		}
+		if (effect)
+			trace("Put an effect here dumb dumb :(");
+		if (isdad){
+			remove(dad);
+			dad = new Character(cordx, cordy, change);
+			add(dad);
+		}
+		else{
+			remove(boyfriend);
+			boyfriend = new Boyfriend(cordx, cordy, change);
+			add(boyfriend);
+		}
+		// characterToChange.curCharacter = change;
+		// characterToChange.curCharacter.set(change);
+		if (healthIconChange)
+			trace("Changing healthicon :)");
+			if (isdad)
+				iconP2.animation.play(change);
+			else
+				iconP1.animation.play(change);
 	}
 
 	function tweenCamIn():Void
@@ -3321,6 +3354,21 @@ class PlayState extends MusicBeatState
 		if (FlxG.sound.music.time > Conductor.songPosition + 20 || FlxG.sound.music.time < Conductor.songPosition - 20)
 		{
 			resyncVocals();
+		}
+
+		switch (curSong.toLowerCase())
+		{
+			case 'limbo':
+				{
+					switch (curStep)
+					{
+						case 640:
+						{
+							switchCharacter("king", true, true, false);
+							switchCharacter("hypedking", false, true, false);
+						}
+					}
+				}
 		}
 
 		#if windows

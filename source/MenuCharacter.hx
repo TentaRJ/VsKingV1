@@ -43,7 +43,7 @@ class MenuCharacter extends FlxSprite
 		animation.addByPrefix('bfConfirm', 'BF HEY!!', 24, false);
 		animation.addByPrefix('gf', "GF Dancing Beat WHITE", 24);
 		animation.addByPrefix('king', "king idle black lines", 24);
-		animation.addByPrefix('blackout', "king idle black lines silhouette", 24);
+		animation.addByPrefix('blackout', "PORTAL IDLE", 24);
 
 		setGraphicSize(Std.int(width * scale));
 		updateHitbox();

@@ -298,7 +298,7 @@ class StoryMenuState extends MusicBeatState
 				if (curWeek == 1)
 				{
 					trace("Come on load the video");
-					FlxG.switchState(new VideoState("assets/videos/intro.webm", new PlayState()));
+					FlxG.switchState(new VideoState("assets/videos/intro/intro.webm", new PlayState()));
 				}
 				else
 				{
