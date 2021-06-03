@@ -828,7 +828,7 @@ class PlayState extends MusicBeatState
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
 		}
 
-		if (SONG.player2 == "hypedking" || SONG.player2 == "blackout")
+		if (SONG.player2 == "blackout")
 		{
 			if(FlxG.save.data.distractions)
 				{

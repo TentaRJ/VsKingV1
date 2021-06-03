@@ -39,7 +39,7 @@ class StoryMenuState extends MusicBeatState
 	var weekCharacters:Array<Dynamic> = [
 		['', 'bf', 'gf'],
 		['king', 'bf', 'gf'],
-		['portal', 'bf', 'gf'],
+		['blackout', 'bf', 'gf'],
 	];
 
 	var weekNames:Array<String> = [
@@ -298,7 +298,7 @@ class StoryMenuState extends MusicBeatState
 				if (curWeek == 1)
 				{
 					trace("Come on load the video");
-					FlxG.switchState(new VideoState("assets/videos/intro/intro.webm", new PlayState()));
+					LoadingState.loadAndSwitchState(new VideoState("assets/videos/intro.webm", new PlayState()), true);
 				}
 				else
 				{

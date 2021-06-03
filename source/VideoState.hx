@@ -95,7 +95,7 @@ class VideoState extends MusicBeatState
 		} else {
 			GlobalVideo.get().play();
 		}
-		
+
 		/*if (useSound)
 		{*/
 			//vidSound = FlxG.sound.play(leSource.replace(".webm", ".ogg"));
