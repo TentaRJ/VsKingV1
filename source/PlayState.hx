@@ -366,6 +366,8 @@ class PlayState extends MusicBeatState
 			// }
 			case 'limbo': 
 					{
+					defaultCamZoom = 0.89;
+
 					var bg:FlxSprite = new FlxSprite(-100).loadGraphic(Paths.image('limbo/sky', 'weekcustom'));
 					bg.scrollFactor.set(0.1, 0.1);
 					add(bg);
@@ -384,6 +386,8 @@ class PlayState extends MusicBeatState
 			}
 			case 'hell': 
 					{
+					defaultCamZoom = 0.89;
+
 					var bg:FlxSprite = new FlxSprite(-100).loadGraphic(Paths.image('hell/sky', 'weekcustom'));
 					bg.scrollFactor.set(0.1, 0.1);
 					add(bg);
@@ -2483,6 +2487,8 @@ class PlayState extends MusicBeatState
 			{
 				campaignScore += Math.round(songScore);
 
+				var thecoolsong:String = storyPlaylist[0];
+
 				storyPlaylist.remove(storyPlaylist[0]);
 
 				if (storyPlaylist.length <= 0)
@@ -2492,7 +2498,18 @@ class PlayState extends MusicBeatState
 					transIn = FlxTransitionableState.defaultTransIn;
 					transOut = FlxTransitionableState.defaultTransOut;
 
-					FlxG.switchState(new StoryMenuState());
+					if (thecoolsong.toLowerCase() == "limbo")
+					{	
+						if (misses <= 10)
+							StoryMenuState.weekUnlocked[Std.int(Math.min(storyWeek + 1, StoryMenuState.weekUnlocked.length - 1))] = true;
+						if (accuracy >= 70)
+							FlxG.switchState(new VideoState("assets/videos/good.webm", new PlayState()));
+						else
+							FlxG.switchState(new VideoState("assets/videos/bad.webm", new PlayState()));
+						FlxG.switchState(new StoryMenuState());
+					}
+					else
+						FlxG.switchState(new StoryMenuState());
 
 					#if windows
 					if (luaModchart != null)
@@ -2501,9 +2518,6 @@ class PlayState extends MusicBeatState
 						luaModchart = null;
 					}
 					#end
-
-					// if ()
-					StoryMenuState.weekUnlocked[Std.int(Math.min(storyWeek + 1, StoryMenuState.weekUnlocked.length - 1))] = true;
 
 					if (SONG.validScore)
 					{
