@@ -29,8 +29,8 @@ class StoryMenuState extends MusicBeatState
 		['Portal']
 	];
 	var curDifficulty:Int = 1;
-
-	public static var weekUnlocked:Array<Bool> = [true, true];
+	
+	public static var weekUnlocked:Array<Bool> = [true, true, false];
 
 	var weekCharacters:Array<Dynamic> = [
 		['', 'bf', 'gf'],
@@ -265,7 +265,7 @@ class StoryMenuState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('confirmMenu'));
 
 				grpWeekText.members[curWeek].startFlashing();
-				grpWeekCharacters.members[1].animation.play('bfConfirm');
+				// grpWeekCharacters.members[1].animation.play('bfConfirm');
 				stopspamming = true;
 			}
 
@@ -288,9 +288,19 @@ class StoryMenuState extends MusicBeatState
 			PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + diffic, PlayState.storyPlaylist[0].toLowerCase());
 			PlayState.storyWeek = curWeek;
 			PlayState.campaignScore = 0;
+			trace(curWeek);
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
-				LoadingState.loadAndSwitchState(new PlayState(), true);
+				if (curWeek == 1)
+				{
+					trace("Come on load the video");
+					LoadingState.loadAndSwitchState(new VideoState("assets/videos/intro.webm", new PlayState()), true);
+				}
+				else
+				{
+					trace('Haha no :)');
+					LoadingState.loadAndSwitchState(new PlayState(), true);
+				}
 			});
 		}
 	}
