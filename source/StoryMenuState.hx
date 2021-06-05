@@ -25,23 +25,20 @@ class StoryMenuState extends MusicBeatState
 
 	var weekData:Array<Dynamic> = [
 		['Tutorial'],
-		['Empty', 'Stuck', 'Limbo'],
-		['Portal']
+		['Empty', 'Stuck', 'Limbo']
 	];
 	var curDifficulty:Int = 1;
 	
-	public static var weekUnlocked:Array<Bool> = [true, true, false];
+	public static var weekUnlocked:Array<Bool> = [true, true, false, false];
 
 	var weekCharacters:Array<Dynamic> = [
 		['', 'bf', 'gf'],
-		['king', 'bf', 'gf'],
-		['blackout', 'bf', 'gf'],
+		['king', 'bf', 'gf']
 	];
 
 	var weekNames:Array<String> = [
 		"How To Funk",
-		"Post-Death Duel",
-		"Finale",
+		"Post-Death Duel"
 	];
 
 	var txtWeekTitle:FlxText;
@@ -69,6 +66,16 @@ class StoryMenuState extends MusicBeatState
 
 		transIn = FlxTransitionableState.defaultTransIn;
 		transOut = FlxTransitionableState.defaultTransOut;
+
+		if (FlxG.save.data.weekUnlocked != null)
+			weekUnlocked = FlxG.save.data.weekUnlocked;
+
+		if (weekUnlocked[2])
+		{
+			weekData[2] =['Portal'];
+			weekCharacters[2] =['blackout', 'bf', 'gf'];
+			weekNames[2] ="Finale";
+		}
 
 		if (FlxG.sound.music != null)
 		{

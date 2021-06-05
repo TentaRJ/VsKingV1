@@ -45,6 +45,19 @@ class FreeplayState extends MusicBeatState
 			songs.push(new SongMetadata(data[0], Std.parseInt(data[2]), data[1]));
 		}
 
+		if (FlxG.save.data.weekUnlocked != null)
+			StoryMenuState.weekUnlocked = FlxG.save.data.weekUnlocked;
+
+		if (StoryMenuState.weekUnlocked[3])
+		{
+			songs.push(new SongMetadata("Portal", 2, "blackout"));
+		}
+
+		if (StoryMenuState.weekUnlocked[4])
+		{
+			songs.push(new SongMetadata("Portal-Potty", 2, "blackout"));
+		}
+
 		/* 
 			if (FlxG.sound.music != null)
 			{

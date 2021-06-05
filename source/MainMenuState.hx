@@ -126,6 +126,25 @@ class MainMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+		if (FlxG.keys.justPressed.R)
+		{
+			new FlxTimer().start(0.05, function(tmr:FlxTimer){
+			trace("reset!");
+			FlxG.save.data.weekUnlocked = [true, true, false, false];
+			FlxG.save.flush();
+			});
+		}
+
+		if ((FlxG.keys.pressed.L && FlxG.keys.pressed.N && FlxG.keys.pressed.O) && FlxG.save.data.weekUnlocked[2])
+		{
+			new FlxTimer().start(0.05, function(tmr:FlxTimer){
+				trace("secret!!");
+				FlxG.save.data.weekUnlocked = [true, true, true, true];
+				FlxG.save.flush();
+				});
+		}
+
+
 		if (FlxG.sound.music.volume < 0.8)
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;

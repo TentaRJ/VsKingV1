@@ -2,5 +2,3 @@ Tutorial:gf:1
 Empty:king:1
 Stuck:king:1
 Limbo:hypedking:1
-Portal:blackout:2
-Portal-Potty:blackout:2
