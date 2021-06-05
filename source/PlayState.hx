@@ -2187,8 +2187,6 @@ class PlayState extends MusicBeatState
 			{
 				campaignScore += Math.round(songScore);
 
-				var thecoolsong:String = storyPlaylist[0].toLowerCase();
-
 				storyPlaylist.remove(storyPlaylist[0]);
 
 				if (storyPlaylist.length <= 0)
@@ -2197,7 +2195,7 @@ class PlayState extends MusicBeatState
 					transIn = FlxTransitionableState.defaultTransIn;
 					transOut = FlxTransitionableState.defaultTransOut;
 
-					switch(thecoolsong)
+					switch(storyPlaylist[0].toLowerCase())
 					{
 					case "limbo":
 					{	
