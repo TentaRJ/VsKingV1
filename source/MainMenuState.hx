@@ -2,6 +2,8 @@ package;
 
 import Controls.KeyboardScheme;
 import flixel.FlxG;
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.effects.FlxFlicker;
@@ -26,6 +28,8 @@ class MainMenuState extends MusicBeatState
 	var curSelected:Int = 0;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
+
+	var logoBl:FlxSprite;
 
 	#if !switch
 	var optionShit:Array<String> = ['story mode', 'freeplay', 'options'];
@@ -90,15 +94,15 @@ class MainMenuState extends MusicBeatState
 
 		for (i in 0...optionShit.length)
 		{
-			var menuItem:FlxSprite = new FlxSprite(0, 60 + (i * 160));
+			var menuItem:FlxSprite = new FlxSprite(20, 60 + (i * 160));
 			menuItem.frames = tex;
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.play('idle');
 			menuItem.ID = i;
-			menuItem.screenCenter(X);
+			// menuItem.screenCenter(X);
 			menuItems.add(menuItem);
-			menuItem.scrollFactor.set();
+			menuItem.scrollFactor.set(0.05, 0.05);
 			menuItem.antialiasing = true;
 		}
 
@@ -108,6 +112,23 @@ class MainMenuState extends MusicBeatState
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
+
+		logoBl = new FlxSprite(1299, 260);
+		logoBl.scrollFactor.set(0,0);
+		logoBl.scale.set(0.6, 0.6);
+		logoBl.frames = Paths.getSparrowAtlas('logoBumpin', 'preload');
+		logoBl.antialiasing = true;
+		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
+		logoBl.animation.play('bump');
+		logoBl.updateHitbox();
+		add(logoBl);
+
+		new FlxTimer().start(0.29, function(swagtimer:FlxTimer)
+		{
+			// FlxTween.tween(menuItems,{x:20, y:60}, 1, {ease:FlxEase.expoInOut});
+
+			FlxTween.tween(logoBl,{x:699, y:260}, 1, {ease:FlxEase.expoInOut});
+		});
 
 		// NG.core.calls.event.logEvent('swag').send();
 
@@ -194,6 +215,12 @@ class MainMenuState extends MusicBeatState
 					selectedSomethin = true;
 					FlxG.sound.play(Paths.sound('confirmMenu'));
 					
+					FlxTween.tween(logoBl,{x:1499, y:260}, 1, {ease:FlxEase.expoInOut});
+					new FlxTimer().start(1, function(swagTimer:FlxTimer){
+						remove(logoBl);
+					});
+					
+
 					if (FlxG.save.data.flashing)
 						FlxFlicker.flicker(magenta, 1.1, 0.15, false);
 
@@ -233,10 +260,10 @@ class MainMenuState extends MusicBeatState
 
 		super.update(elapsed);
 
-		menuItems.forEach(function(spr:FlxSprite)
-		{
-			spr.screenCenter(X);
-		});
+		// menuItems.forEach(function(spr:FlxSprite)
+		// {
+		// 	spr.screenCenter(X);
+		// });
 	}
 	
 	function goToState()

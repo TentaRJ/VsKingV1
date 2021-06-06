@@ -187,6 +187,11 @@ class StoryMenuState extends MusicBeatState
 		add(scoreText);
 		add(txtWeekTitle);
 
+		new FlxTimer().start(0.84, function{
+			FlxTween.tween(txtTracklist,{x:FlxG.width * 0.05},1,{ease:FlxEase.expoInOut});
+
+		});
+
 		updateText();
 
 		trace("Line 165");
@@ -275,6 +280,8 @@ class StoryMenuState extends MusicBeatState
 				// grpWeekCharacters.members[1].animation.play('bfConfirm');
 				stopspamming = true;
 			}
+
+			FlxTween.tween(FlxG.camera, {zoom: 9}, 0.8, {ease: FlxEase.expoIn});
 
 			PlayState.storyPlaylist = weekData[curWeek];
 			PlayState.isStoryMode = true;

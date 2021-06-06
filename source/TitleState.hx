@@ -401,59 +401,29 @@ class TitleState extends MusicBeatState
 
 		switch (curBeat)
 		{
-			case 1:
-				createCoolText(['literallynoone', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
+			case 2:
+				createCoolText(['literallynoone', 'PunkinMike', 'tictacto', 'TKTems', 'TentaRJ']);
 			credTextShit.visible = true;
-			case 3:
-				addMoreText('hi there');
-			// credTextShit.text += '\npresent...';
-			// credTextShit.addText();
 			case 4:
 				deleteCoolText();
-			// credTextShit.visible = false;
-			// credTextShit.text = 'In association \nwith';
-			// credTextShit.screenCenter();
 			case 5:
-				if (Main.watermarks)
-					createCoolText(['Kade Engine', 'by']);
-				else
-					createCoolText(['In Partnership', 'with']);
+				createCoolText(['Powered', 'by']);
 			case 7:
-				if (Main.watermarks)
-					addMoreText('KadeDeveloper');
-				else
-				{
-					addMoreText('Newgrounds');
-					ngSpr.visible = true;
-				}
-			// credTextShit.text += '\nNewgrounds';
+				addMoreText('Kade Engine');
 			case 8:
 				deleteCoolText();
-				ngSpr.visible = false;
-			// credTextShit.visible = false;
-
-			// credTextShit.text = 'Shoutouts Tom Fulp';
-			// credTextShit.screenCenter();
 			case 9:
 				createCoolText([curWacky[0]]);
-			// credTextShit.visible = true;
 			case 11:
 				addMoreText(curWacky[1]);
-			// credTextShit.text += '\nlmao';
 			case 12:
 				deleteCoolText();
-			// credTextShit.visible = false;
-			// credTextShit.text = "Friday";
-			// credTextShit.screenCenter();
 			case 13:
 				addMoreText('Vs');
-			// credTextShit.visible = true;
 			case 14:
 				addMoreText('King');
-			// credTextShit.text += '\nNight';
 			case 15:
-				addMoreText('Full Week'); // credTextShit.text += '\nFunkin';
-
+				addMoreText('Full Week');
 			case 16:
 				skipIntro();
 		}
