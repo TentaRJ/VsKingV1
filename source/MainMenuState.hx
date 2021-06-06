@@ -135,15 +135,24 @@ class MainMenuState extends MusicBeatState
 			});
 		}
 
+		#if debug
 		if ((FlxG.keys.pressed.L && FlxG.keys.pressed.N && FlxG.keys.pressed.O) && FlxG.save.data.weekUnlocked[2])
 		{
-			new FlxTimer().start(0.05, function(tmr:FlxTimer){
+			new FlxTimer().start(0.22, function(tmr:FlxTimer){
 				trace("secret!!");
-				FlxG.save.data.weekUnlocked = [true, true, true, true];
+				FlxG.save.data.weekUnlocked = [true, true, true, true, true];
 				FlxG.save.flush();
 				});
 		}
-
+		if (FlxG.keys.pressed.T && FlxG.keys.pressed.E && FlxG.keys.justPressed.N)
+		{
+			new FlxTimer().start(0.22, function(tmr:FlxTimer){
+				trace("Ten!!");
+				FlxG.save.data.weekUnlocked = [true, true, true, true, true];
+				FlxG.save.flush();
+				});
+		}
+		#end
 
 		if (FlxG.sound.music.volume < 0.8)
 		{

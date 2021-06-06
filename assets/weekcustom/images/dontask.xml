@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="dontask.png">
+	<!-- Created with Adobe Animate version 21.0.1.37179 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="dumpy0000" x="0" y="0" width="650" height="571" frameX="-4" frameY="-1" frameWidth="729" frameHeight="573"/>
+	<SubTexture name="dumpy0001" x="650" y="0" width="696" height="571" frameX="-6" frameY="0" frameWidth="729" frameHeight="573"/>
+	<SubTexture name="dumpy0002" x="0" y="571" width="714" height="563" frameX="-15" frameY="-9" frameWidth="729" frameHeight="573"/>
+	<SubTexture name="dumpy0003" x="714" y="571" width="697" height="553" frameX="-6" frameY="-20" frameWidth="729" frameHeight="573"/>
+	<SubTexture name="dumpy0004" x="0" y="1134" width="680" height="551" frameX="0" frameY="-21" frameWidth="729" frameHeight="573"/>
+	<SubTexture name="dumpy0005" x="680" y="1134" width="653" height="564" frameX="-2" frameY="-8" frameWidth="729" frameHeight="573"/>
+</TextureAtlas>

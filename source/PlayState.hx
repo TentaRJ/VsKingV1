@@ -48,6 +48,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxSort;
 import flixel.util.FlxStringUtil;
 import flixel.util.FlxTimer;
+import flixel.util.FlxAxes;
 import haxe.Json;
 import lime.utils.Assets;
 import openfl.display.BlendMode;
@@ -482,7 +483,7 @@ class PlayState extends MusicBeatState
 		gf = new Character(400, 130, gfVersion);
 		gf.scrollFactor.set(0.95, 0.95);
 
-		dad = new Character(100, 100, SONG.player2);
+		dad = new Character(84, 100, SONG.player2);
 
 		var camPos:FlxPoint = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
 
@@ -589,12 +590,26 @@ class PlayState extends MusicBeatState
 
 		add(gf);
 
+		if (SONG.song.toLowerCase()=="portal-potty")
+		{
+			gf.visible = false;
+			var dumpy:FlxSprite = new FlxSprite(gf.x, gf.y + 200);
+			dumpy.frames = Paths.getSparrowAtlas("dontask", "weekcustom");
+			dumpy.animation.addByPrefix("dumpyFunny", "dumpy0", 24, true);
+			dumpy.animation.play("dumpyFunny", true);
+			dumpy.scale.set(0.8, 0.8);
+			dumpy.updateHitbox();
+			add(dumpy);
+
+		}
+
 		// Shitty layering but whatev it works LOL
 		if (curStage == 'limo')
 			add(limo);
 
 		add(dad);
 		add(boyfriend);
+		
 		if (loadRep)
 		{
 			FlxG.watch.addQuick('rep rpesses',repPresses);
@@ -795,68 +810,89 @@ class PlayState extends MusicBeatState
 
 	function limboIntro(?dialogueBox:DialogueBox):Void
 	{
-		var kingCutscene:FlxSprite = new FlxSprite(300, 100);
+		remove(gf);
+		remove(boyfriend);
+		remove(dad);
+
+		var bgCut:FlxSprite = new FlxSprite(-100).loadGraphic(Paths.image('limbo/sky', 'weekcustom'));
+		bgCut.scrollFactor.set(0.1, 0.1);
+
+		var cityCut:FlxSprite = new FlxSprite(-10).loadGraphic(Paths.image('limbo/rockBG', 'weekcustom'));
+		cityCut.scrollFactor.set(0.3, 0);
+		cityCut.setGraphicSize(Std.int(cityCut.width * 0.85));
+		cityCut.updateHitbox();
+
+		var streetBehindCut:FlxSprite = new FlxSprite(-40, 50).loadGraphic(Paths.image('limbo/rockBETWEEN','weekcustom'));
+		streetBehindCut.updateHitbox();
+
+		var streetCut:FlxSprite = new FlxSprite(-230, streetBehindCut.y).loadGraphic(Paths.image('limbo/rockPLAYER','weekcustom'));
+		streetCut.updateHitbox();
+
+		var kingCutscene:FlxSprite = new FlxSprite(200, 400);
 		kingCutscene.frames = Paths.getSparrowAtlas('cutKing','shared');
 		kingCutscene.animation.addByPrefix('idle', 'transition', 24, false);
+		kingCutscene.animation.addByPrefix('arm-up', 'arm-up0', 24, false);
+		kingCutscene.animation.addByPrefix('eyes-glow', 'eyes-glow0', 24, false);
 		kingCutscene.setGraphicSize(Std.int(kingCutscene.width));
-		kingCutscene.scrollFactor.set();
+		kingCutscene.scrollFactor.set(1,1);
 		kingCutscene.updateHitbox();
-		remove(dad);
-		add(kingCutscene);
-
-		var black:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
-		black.scrollFactor.set();
-		add(black);
-
-		var red:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, 0xFFffffff);
-		red.alpha = 0;
-		red.scrollFactor.set();
 
 		inCutscene = true;
 
-		camFollow.setPosition(dad.getMidpoint().x + 300, boyfriend.getMidpoint().y);
+		camFollow.setPosition(dad.getMidpoint().x + 200, boyfriend.getMidpoint().y - 50);
 
-		remove(black);
+		//backgrounds aghhhh
+		add(bgCut);
+		add(cityCut);
+		add(streetBehindCut);
+		add(streetCut);
+		add(gf);
+		add(boyfriend);
+		add(kingCutscene);
 
-		// god please spare my dumb ass i cannot do this|
-		camHUD.visible = false;
-		remove(black);
-		kingCutscene.animation.play('idle');
-
-		new FlxTimer().start(1, function(swagTimer:FlxTimer)
+		// da cutscene
+		FlxG.sound.play(Paths.sound('bwomp', 'weekcustom'),0.89,false);
+		kingCutscene.animation.play("idle", true);
+		new FlxTimer().start(2.1, function(swagTimer:FlxTimer)
 			{
-				camFollow.camera.shake(0.03, 6);
-			});
-	
-		new FlxTimer().start(2, function(swagTimer:FlxTimer)
-			{
-				add(red);
-				red.alpha += 0.10;
-
-				if (red.alpha < 1)
-					{
-						swagTimer.reset(0.1);
-					}
-				else
+				kingCutscene.animation.play("arm-up");
+				new FlxTimer().start(0.6, function(swagTimer:FlxTimer)
 				{
-					new FlxTimer().start(3.01, function(swagTimer:FlxTimer)
+					FlxG.sound.play(Paths.sound('sparkly', 'weekcustom'));
+					kingCutscene.animation.play("eyes-glow", false);
+					new FlxTimer().start(0.09, function(swagTimer:FlxTimer)
+					{
+						camFollow.camera.fade(FlxColor.WHITE,0.5,false);
+						camFollow.camera.shake(0.05,0.51, null);
+						new FlxTimer().start(3, function(swagTimer:FlxTimer)
 						{
+							remove(bgCut);
+							remove(cityCut);
+							remove(streetBehindCut);
+							remove(streetCut);
 							remove(kingCutscene);
+
+							remove(gf);
+							add(gf);
+							remove(boyfriend);
+							add(boyfriend);
 							add(dad);
-							remove(red);
-							camHUD.visible = true;
+
 							camFollow.camera.shake(0);
+							if (dialogueBox != null)
+								{
+									camFollow.camera.fade(FlxColor.WHITE,0.5,true);
+									add(dialogueBox);
+								}
+							else
+								{
+									camFollow.camera.fade(FlxColor.WHITE,0.5,true);
+									startCountdown();
+								}
 						});
-				}
+					});
+				});
 			});
-		if (dialogueBox != null)
-			{
-				add(dialogueBox);
-			}
-			else
-			{
-				startCountdown();
-			}
 	}
 
 	function schoolIntro(?dialogueBox:DialogueBox):Void
@@ -884,6 +920,8 @@ class PlayState extends MusicBeatState
 
 	function startCountdown():Void
 	{
+		camHUD.visible = true;
+
 		inCutscene = false;
 
 		generateStaticArrows(0);
@@ -1454,8 +1492,8 @@ class PlayState extends MusicBeatState
 		perfectMode = false;
 		#end
 
-		// if (FlxG.save.data.botplay && FlxG.keys.justPressed.ONE)
-		// 	camHUD.visible = !camHUD.visible;
+		if (FlxG.save.data.botplay && FlxG.keys.justPressed.ONE)
+			camHUD.visible = !camHUD.visible;
 
 		#if windows
 		if (executeModchart && luaModchart != null && songStarted)
@@ -2187,66 +2225,67 @@ class PlayState extends MusicBeatState
 			{
 				campaignScore += Math.round(songScore);
 
+				var coolsong:String = storyPlaylist[0].toLowerCase();
+
 				storyPlaylist.remove(storyPlaylist[0]);
 
 				if (storyPlaylist.length <= 0)
-				{
-
-					transIn = FlxTransitionableState.defaultTransIn;
-					transOut = FlxTransitionableState.defaultTransOut;
-
-					switch(storyPlaylist[0].toLowerCase())
 					{
-					case "limbo":
-					{	
-						if (accuracy >= 70 && !FlxG.save.data.botplay)
+						transIn = FlxTransitionableState.defaultTransIn;
+						transOut = FlxTransitionableState.defaultTransOut;
+
+						switch (coolsong)
 						{
-							if (misses <= 10)
+							case "limbo":
+							{	
+								if (accuracy >= 70 && !FlxG.save.data.botplay)
 								{
-									StoryMenuState.weekUnlocked[2] = true;
-									FlxG.save.data.weekUnlocked = StoryMenuState.weekUnlocked;
-									FlxG.save.flush();
+									if (misses <= 10)
+									{
+										StoryMenuState.weekUnlocked[2] = true;
+										FlxG.save.data.weekUnlocked = StoryMenuState.weekUnlocked;
+										FlxG.save.flush();
+									}
+									trace("Good!");
+									if (!Reward.leftState && StoryMenuState.weekUnlocked[2])
+										FlxG.switchState(new VideoState("assets/videos/good.webm", new Reward()));
+									else
+										FlxG.switchState(new VideoState("assets/videos/good.webm", new StoryMenuState()));
 								}
-							trace("Good!");
-							if (!Reward.leftState && StoryMenuState.weekUnlocked[2])
-								FlxG.switchState(new VideoState("assets/videos/good.webm", new Reward()));
-							else
-								FlxG.switchState(new VideoState("assets/videos/good.webm", new StoryMenuState()));
-						}
-						if (FlxG.save.data.botplay)
-						{
-							trace("No botplay!");
-							FlxG.switchState(new StoryMenuState);
-						}
-						else
-						{
-							trace("Bad!");
-							FlxG.switchState(new VideoState("assets/videos/bad.webm", new StoryMenuState()));
-						}
-					}
-					case "portal":
-					{
-						StoryMenuState.weekUnlocked[3] = true;
-						FlxG.save.data.weekUnlocked = StoryMenuState.weekUnlocked;
-						FlxG.save.flush();
-						
-						if (FlxG.random.bool(5))
-						{
-						trace("You won the RNG!!");
-						StoryMenuState.weekUnlocked[4] = true;
-						FlxG.save.data.weekUnlocked = StoryMenuState.weekUnlocked;
-						FlxG.save.flush();
-						}
-						else {trace("No RNG!");}
+								if (FlxG.save.data.botplay)
+								{
+									trace("No botplay!");
+									FlxG.switchState(new VideoState("assets/videos/bad.webm", new StoryMenuState()));
+								}
+								else
+								{
+									trace("Bad!");
+									FlxG.switchState(new VideoState("assets/videos/bad.webm", new StoryMenuState()));
+								}
+							}
+							case "portal":
+							{
+								StoryMenuState.weekUnlocked[3] = true;
+								FlxG.save.data.weekUnlocked = StoryMenuState.weekUnlocked;
+								FlxG.save.flush();
+								
+								if (FlxG.random.bool(5))
+								{
+								trace("You won the RNG!!");
+								StoryMenuState.weekUnlocked[4] = true;
+								FlxG.save.data.weekUnlocked = StoryMenuState.weekUnlocked;
+								FlxG.save.flush();
+								}
+								else {trace("No RNG!");}
 
-						FlxG.switchState(new StoryMenuState());
-					}
-					default:
-					{
-						FlxG.sound.playMusic(Paths.music('freakyMenu'));
-						FlxG.switchState(new StoryMenuState());
-					}
-					}	
+								FlxG.switchState(new StoryMenuState());
+							}
+							default:
+							{
+								FlxG.sound.playMusic(Paths.music('freakyMenu'));
+								FlxG.switchState(new StoryMenuState());
+							}
+						}	
 
 					#if windows
 					if (luaModchart != null)
