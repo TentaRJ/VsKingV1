@@ -16,6 +16,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import io.newgrounds.NG;
 import lime.app.Application;
+import Main._kingsave;
 
 #if windows
 import Discord.DiscordClient;
@@ -152,9 +153,17 @@ class MainMenuState extends MusicBeatState
 		{
 			new FlxTimer().start(0.05, function(tmr:FlxTimer){
 			trace("reset!");
-			FlxG.save.data.weekUnlocked = [true, true, false, false];
-			FlxG.save.flush();
+			_kingsave.data.weekUnlocked = [true, true, false, false];
+			_kingsave.flush();
 			});
+		}
+		if (FlxG.keys.justPressed.T)
+		{
+			new FlxTimer().start(0.05, function(tmr:FlxTimer){
+				trace("reset!");
+				_kingsave.data.weekUnlocked = [true, true, true, true, true];
+				_kingsave.flush();
+				});
 		}
 		#end
 

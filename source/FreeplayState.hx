@@ -9,6 +9,7 @@ import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
+import Main._kingsave;
 
 
 #if windows
@@ -45,8 +46,8 @@ class FreeplayState extends MusicBeatState
 			songs.push(new SongMetadata(data[0], Std.parseInt(data[2]), data[1]));
 		}
 
-		if (FlxG.save.data.weekUnlocked != null)
-			StoryMenuState.weekUnlocked = FlxG.save.data.weekUnlocked;
+		if (_kingsave.data.weekUnlocked != null)
+			StoryMenuState.weekUnlocked = _kingsave.data.weekUnlocked;
 
 		if (StoryMenuState.weekUnlocked[3])
 		{

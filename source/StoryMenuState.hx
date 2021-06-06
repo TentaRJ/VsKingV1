@@ -13,6 +13,7 @@ import flixel.tweens.FlxEase;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.net.curl.CURLCode;
+import Main._kingsave;
 
 #if windows
 import Discord.DiscordClient;
@@ -39,7 +40,7 @@ class StoryMenuState extends MusicBeatState
 
 	var weekNames:Array<String> = [
 		"How To Funk",
-		"Post-Death Duel"
+		"Post-Mortem Mix-Up"
 	];
 
 	var txtWeekTitle:FlxText;
@@ -68,8 +69,8 @@ class StoryMenuState extends MusicBeatState
 		transIn = FlxTransitionableState.defaultTransIn;
 		transOut = FlxTransitionableState.defaultTransOut;
 
-		if (FlxG.save.data.weekUnlocked != null)
-			weekUnlocked = FlxG.save.data.weekUnlocked;
+		if (_kingsave.data.weekUnlocked != null)
+			weekUnlocked = _kingsave.data.weekUnlocked;
 
 		if (weekUnlocked[2])
 		{

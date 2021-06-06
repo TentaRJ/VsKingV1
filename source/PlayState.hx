@@ -54,6 +54,7 @@ import lime.utils.Assets;
 import openfl.display.BlendMode;
 import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
+import Main._kingsave;
 
 #if windows
 import Discord.DiscordClient;
@@ -2286,8 +2287,8 @@ class PlayState extends MusicBeatState
 								if (misses <= 10 && !FlxG.save.data.botplay)
 								{
 									StoryMenuState.weekUnlocked[2] = true;
-									FlxG.save.data.weekUnlocked = StoryMenuState.weekUnlocked;
-									FlxG.save.flush();
+									_kingsave.data.weekUnlocked = StoryMenuState.weekUnlocked;
+									_kingsave.flush();
 									trace("Good!");
 									if (!Reward.leftState && StoryMenuState.weekUnlocked[2])
 										FlxG.switchState(new VideoState("assets/videos/good.webm", new Reward()));
@@ -2303,15 +2304,15 @@ class PlayState extends MusicBeatState
 							case "portal":
 							{
 								StoryMenuState.weekUnlocked[3] = true;
-								FlxG.save.data.weekUnlocked = StoryMenuState.weekUnlocked;
-								FlxG.save.flush();
+								_kingsave.data.weekUnlocked = StoryMenuState.weekUnlocked;
+								_kingsave.flush();
 								
 								if (FlxG.random.bool(5))
 								{
 								trace("You won the RNG!!");
 								StoryMenuState.weekUnlocked[4] = true;
-								FlxG.save.data.weekUnlocked = StoryMenuState.weekUnlocked;
-								FlxG.save.flush();
+								_kingsave.data.weekUnlocked = StoryMenuState.weekUnlocked;
+								_kingsave.flush();
 								}
 								else {trace("No RNG!");}
 
@@ -2337,9 +2338,6 @@ class PlayState extends MusicBeatState
 						NGio.unlockMedal(60961);
 						Highscore.saveWeekScore(storyWeek, campaignScore, storyDifficulty);
 					}
-
-					FlxG.save.data.weekUnlocked = StoryMenuState.weekUnlocked;
-					FlxG.save.flush();
 				}
 				else
 				{
