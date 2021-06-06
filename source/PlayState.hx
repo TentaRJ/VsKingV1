@@ -162,7 +162,6 @@ class PlayState extends MusicBeatState
 	var isHalloween:Bool = false;
 
 	var phillyCityLights:FlxTypedGroup<FlxSprite>;
-	var hellSkyProgress:FlxTypedGroup<FlxSprite>;
 	var phillyTrain:FlxSprite;
 	var trainSound:FlxSound;
 
@@ -351,26 +350,9 @@ class PlayState extends MusicBeatState
 
 		switch(SONG.stage)
 		{
-			// case 'halloween': 
-			// {
-			// 	curStage = 'spooky';
-			// 	halloweenLevel = true;
-
-			// 	var hallowTex = Paths.getSparrowAtlas('halloween_bg','week2');
-
-			// 	halloweenBG = new FlxSprite(-200, -100);
-			// 	halloweenBG.frames = hallowTex;
-			// 	halloweenBG.animation.addByPrefix('idle', 'halloweem bg0');
-			// 	halloweenBG.animation.addByPrefix('lightning', 'halloweem bg lightning strike', 24, false);
-			// 	halloweenBG.animation.play('idle');
-			// 	halloweenBG.antialiasing = true;
-			// 	add(halloweenBG);
-
-			// 	isHalloween = true;
-			// }
 			case 'limbo': 
 					{
-					defaultCamZoom = 1.14;
+						defaultCamZoom = 1.11;
 
 					var bg:FlxSprite = new FlxSprite(-100).loadGraphic(Paths.image('limbo/sky', 'weekcustom'));
 					bg.scrollFactor.set(0.1, 0.1);
@@ -390,9 +372,12 @@ class PlayState extends MusicBeatState
 			}
 			case 'hell': 
 					{
-					defaultCamZoom = 1.14;
+					defaultCamZoom = 1.11;
 
-					var bg:FlxSprite = new FlxSprite(-100).loadGraphic(Paths.image('hell/sky', 'weekcustom'));
+					var bg:FlxSprite = new FlxSprite(-100);
+					bg.frames = Paths.getSparrowAtlas('hell/hellsky', 'weekcustom');
+					bg.animation.addByPrefix("bgAnim", "hell", 8, true);
+					bg.animation.play("bgAnim", true, false, -1);
 					bg.scrollFactor.set(0.1, 0.1);
 					add(bg);
 
@@ -465,11 +450,6 @@ class PlayState extends MusicBeatState
 			}
 		}
 		var gfVersion:String = 'gf';
-
-		#if debug
-		var testblock:FlxSprite = new FlxSprite(0,0).makeGraphic(100,100,FlxColor.YELLOW);
-		add(testblock);
-		#end
 
 		switch (SONG.gfVersion)
 		{
@@ -1622,6 +1602,7 @@ class PlayState extends MusicBeatState
 				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 		}
 
+		#if debug
 		if (FlxG.keys.justPressed.SEVEN)
 		{
 			#if windows
@@ -1636,6 +1617,7 @@ class PlayState extends MusicBeatState
 			}
 			#end
 		}
+		#end
 
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
 		// FlxG.watch.addQuick('VOLRight', vocals.amplitudeRight);
@@ -2298,24 +2280,19 @@ class PlayState extends MusicBeatState
 						{
 							case "limbo":
 							{	
-								if (accuracy >= 70 && !FlxG.save.data.botplay)
+								#if debug
+								misses = 4;
+								#end
+								if (misses <= 10 && !FlxG.save.data.botplay)
 								{
-									if (misses <= 10)
-									{
-										StoryMenuState.weekUnlocked[2] = true;
-										FlxG.save.data.weekUnlocked = StoryMenuState.weekUnlocked;
-										FlxG.save.flush();
-									}
+									StoryMenuState.weekUnlocked[2] = true;
+									FlxG.save.data.weekUnlocked = StoryMenuState.weekUnlocked;
+									FlxG.save.flush();
 									trace("Good!");
 									if (!Reward.leftState && StoryMenuState.weekUnlocked[2])
 										FlxG.switchState(new VideoState("assets/videos/good.webm", new Reward()));
 									else
 										FlxG.switchState(new VideoState("assets/videos/good.webm", new StoryMenuState()));
-								}
-								if (FlxG.save.data.botplay)
-								{
-									trace("No botplay!");
-									FlxG.switchState(new VideoState("assets/videos/bad.webm", new StoryMenuState()));
 								}
 								else
 								{

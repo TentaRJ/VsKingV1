@@ -9,6 +9,7 @@ import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.net.curl.CURLCode;
@@ -187,10 +188,10 @@ class StoryMenuState extends MusicBeatState
 		add(scoreText);
 		add(txtWeekTitle);
 
-		new FlxTimer().start(0.84, function{
-			FlxTween.tween(txtTracklist,{x:FlxG.width * 0.05},1,{ease:FlxEase.expoInOut});
-
-		});
+		// new FlxTimer().start(0.84, function(swagTimer:FlxTimer)
+		// {
+		// 	FlxTween.tween(txtTracklist,{x:FlxG.width * 0.05},1,{ease:FlxEase.expoInOut});
+		// });
 
 		updateText();
 
@@ -276,12 +277,13 @@ class StoryMenuState extends MusicBeatState
 			{
 				FlxG.sound.play(Paths.sound('confirmMenu'));
 
+				FlxTween.tween(FlxG.camera, {y:-1000}, 1.4, {ease: FlxEase.expoInOut});
+
 				grpWeekText.members[curWeek].startFlashing();
 				// grpWeekCharacters.members[1].animation.play('bfConfirm');
 				stopspamming = true;
 			}
 
-			FlxTween.tween(FlxG.camera, {zoom: 9}, 0.8, {ease: FlxEase.expoIn});
 
 			PlayState.storyPlaylist = weekData[curWeek];
 			PlayState.isStoryMode = true;
@@ -353,7 +355,7 @@ class StoryMenuState extends MusicBeatState
 		intendedScore = Highscore.getWeekScore(curWeek, curDifficulty);
 		#end
 
-		FlxTween.tween(sprDifficulty, {y: leftArrow.y + 15, alpha: 1}, 0.07);
+		FlxTween.tween(sprDifficulty, {y: leftArrow.y + 15, alpha: 1}, 1);
 	}
 
 	var lerpScore:Int = 0;

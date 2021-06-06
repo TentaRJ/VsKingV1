@@ -402,7 +402,7 @@ class TitleState extends MusicBeatState
 		switch (curBeat)
 		{
 			case 2:
-				createCoolText(['literallynoone', 'PunkinMike', 'tictacto', 'TKTems', 'TentaRJ']);
+				createCoolText(['The Cool Pals:','literallynoone', 'PunkinMike', 'tictacto', 'TKTems', 'TentaRJ']);
 			credTextShit.visible = true;
 			case 4:
 				deleteCoolText();
