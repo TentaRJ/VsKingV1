@@ -2,6 +2,8 @@
 
 This modpack uses the code from [GrowtopiaFli/OpenFL-HaxeFlixel-Video-Code](https://github.com/GrowtopiaFli/openfl-haxeflixel-video-code). You will need to install a few more things before compiling!
 
+[LNO's Discord](https://discord.gg/sWBdCjTMuw)
+
 ```
 In the terminal, run these lines:
 -haxelib install actuate
@@ -12,8 +14,6 @@ In the terminal, run these lines:
 Kade Engine Version: 1.4.2
 
 ![Kade Engine logo](https://user-images.githubusercontent.com/26305836/110529589-4b4eb600-80ce-11eb-9c44-e899118b0bf0.png)
-
-[![LNO's Discord](https://img.shields.io/discord/808039740464300104?label=discord)](https://discord.gg/sWBdCjTMuw)
 
 ### Kade Engine Things:
 ![GitHub commits since latest release (by date)](https://img.shields.io/github/commits-since/KadeDev/Kade-Engine/latest) ![GitHub repo size](https://img.shields.io/github/repo-size/KadeDev/Kade-Engine) ![Lines of code](https://img.shields.io/tokei/lines/github/KadeDev/Kade-Engine) ![Supported platforms](https://img.shields.io/badge/supported%20platforms-windows%2C%20macOS%2C%20linux%2C%20html5-blue) ![GitHub all releases](https://img.shields.io/github/downloads/KadeDev/Kade-Engine/total) ![GitHub](https://img.shields.io/github/license/KadeDev/Kade-Engine) ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/KadeDev/Kade-Engine?include_prereleases&label=latest%20version) 
