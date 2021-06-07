@@ -347,6 +347,8 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(Paths.txt('limbo/limboDialogue'));
 			case 'portal':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('portal/portalDialogue'));
+			case 'portal-potty':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('portal-potty/portalPottyDialogue'));
 		}
 
 		switch(SONG.stage)
@@ -773,6 +775,8 @@ class PlayState extends MusicBeatState
 				case 'limbo':
 					limboIntro(doof);
 				case 'portal':
+					schoolIntro(doof);
+				case 'portal-potty':
 					schoolIntro(doof);
 				default:
 					startCountdown();
@@ -1603,7 +1607,6 @@ class PlayState extends MusicBeatState
 				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 		}
 
-		#if debug
 		if (FlxG.keys.justPressed.SEVEN)
 		{
 			#if windows
@@ -1618,7 +1621,6 @@ class PlayState extends MusicBeatState
 			}
 			#end
 		}
-		#end
 
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
 		// FlxG.watch.addQuick('VOLRight', vocals.amplitudeRight);
@@ -2111,6 +2113,14 @@ class PlayState extends MusicBeatState
 	
 						daNote.active = false;
 
+						if (SONG.song.toLowerCase()=="portal"||SONG.song.toLowerCase()=="portal-potty")
+						{
+							if (health>0)
+							{
+								health -= 0.0299;
+							}
+						}
+
 						daNote.kill();
 						notes.remove(daNote, true);
 						daNote.destroy();
@@ -2225,6 +2235,16 @@ class PlayState extends MusicBeatState
 
 	function endSong():Void
 	{
+		//15% Chance
+		if (FlxG.random.bool(15) && SONG.song.toLowerCase() == "portal-potty")
+			{
+			trace("You won the RNG!!");
+			_kingsave.data.dumpyFunny = true;
+			_kingsave.flush();
+			}
+			else {trace("No RNG!");}
+
+
 		if (!loadRep)
 			rep.SaveReplay(saveNotes);
 		else
@@ -2284,13 +2304,13 @@ class PlayState extends MusicBeatState
 								#if debug
 								misses = 4;
 								#end
-								if (misses <= 10 && !FlxG.save.data.botplay)
+								if (accuracy > 70 && !FlxG.save.data.botplay && storyDifficulty != 0)
 								{
 									StoryMenuState.weekUnlocked[2] = true;
 									_kingsave.data.weekUnlocked = StoryMenuState.weekUnlocked;
 									_kingsave.flush();
 									trace("Good!");
-									if (!Reward.leftState && StoryMenuState.weekUnlocked[2])
+									if (!_kingsave.data.reward.leftState && StoryMenuState.weekUnlocked[2])
 										FlxG.switchState(new VideoState("assets/videos/good.webm", new Reward()));
 									else
 										FlxG.switchState(new VideoState("assets/videos/good.webm", new StoryMenuState()));
@@ -2306,15 +2326,6 @@ class PlayState extends MusicBeatState
 								StoryMenuState.weekUnlocked[3] = true;
 								_kingsave.data.weekUnlocked = StoryMenuState.weekUnlocked;
 								_kingsave.flush();
-								
-								if (FlxG.random.bool(5))
-								{
-								trace("You won the RNG!!");
-								StoryMenuState.weekUnlocked[4] = true;
-								_kingsave.data.weekUnlocked = StoryMenuState.weekUnlocked;
-								_kingsave.flush();
-								}
-								else {trace("No RNG!");}
 
 								FlxG.switchState(new StoryMenuState());
 							}
@@ -2929,6 +2940,7 @@ class PlayState extends MusicBeatState
 			totalPlayed += 1;
 			accuracy = Math.max(0,totalNotesHit / totalPlayed * 100);
 			accuracyDefault = Math.max(0, totalNotesHitDefault / totalPlayed * 100);
+			trace(accuracy);
 		}
 
 

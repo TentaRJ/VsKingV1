@@ -7,6 +7,7 @@ import Controls.KeyboardScheme;
 import flixel.FlxG;
 import openfl.display.FPS;
 import openfl.Lib;
+import Main._kingsave;
 
 class OptionCatagory
 {
@@ -602,4 +603,25 @@ class BotPlay extends Option
 	
 	private override function updateDisplay():String
 		return "BotPlay " + (FlxG.save.data.botplay ? "on" : "off");
+}
+class Reset extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+
+	public override function press():Bool
+	{
+		_kingsave.data.weekUnlocked = [true, true, false, false];
+		_kingsave.data.dumpyFunny = false;
+		trace("reset all data!");
+		trace(_kingsave.data.weekUnlocked);
+		trace(_kingsave.data.dumpyFunny);
+		_kingsave.flush();
+		return true;
+	}
+	private override function updateDisplay():String
+		return "Reset?";
 }

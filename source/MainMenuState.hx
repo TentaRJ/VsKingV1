@@ -121,6 +121,7 @@ class MainMenuState extends MusicBeatState
 		logoBl.antialiasing = true;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
 		logoBl.animation.play('bump');
+		logoBl.scrollFactor.set(0, 0.25);
 		logoBl.updateHitbox();
 		add(logoBl);
 
@@ -151,19 +152,27 @@ class MainMenuState extends MusicBeatState
 		#if debug
 		if (FlxG.keys.justPressed.R)
 		{
-			new FlxTimer().start(0.05, function(tmr:FlxTimer){
-			trace("reset!");
-			_kingsave.data.weekUnlocked = [true, true, false, false];
-			_kingsave.flush();
+			new FlxTimer().start(0.05, function(tmr:FlxTimer)
+			{
+				trace("reset!");
+				_kingsave.data.weekUnlocked = [true, true, false, false];
+				_kingsave.data.dumpyFunny=false;
+				trace(_kingsave.data.weekUnlocked);
+				trace(_kingsave.data.dumpyFunny);
+				_kingsave.flush();
 			});
 		}
 		if (FlxG.keys.justPressed.T)
 		{
-			new FlxTimer().start(0.05, function(tmr:FlxTimer){
-				trace("reset!");
-				_kingsave.data.weekUnlocked = [true, true, true, true, true];
+			new FlxTimer().start(0.05, function(tmr:FlxTimer)
+			{
+				trace("t!");
+				_kingsave.data.weekUnlocked = [true, true, true, true];
+				_kingsave.data.dumpyFunny=true;
+				trace(_kingsave.data.weekUnlocked);
+				trace(_kingsave.data.dumpyFunny);
 				_kingsave.flush();
-				});
+			});
 		}
 		#end
 

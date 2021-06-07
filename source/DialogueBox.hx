@@ -87,7 +87,7 @@ class DialogueBox extends FlxSpriteGroup
 				var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.image('weeb/spiritFaceForward'));
 				face.setGraphicSize(Std.int(face.width * 6));
 				add(face);
-			case 'empty' | 'stuck' | 'limbo' | 'portal':
+			case 'empty' | 'stuck' | 'limbo' | 'portal' | 'portal-potty':
 				hasDialog = true;
 				box.frames = Paths.getSparrowAtlas('speech_bubble_talking');
 				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
@@ -182,7 +182,7 @@ class DialogueBox extends FlxSpriteGroup
 				add(portraitRight);
 				portraitRight.visible = false;
 			}
-		if (PlayState.SONG.song.toLowerCase()=='portal')
+		if (PlayState.SONG.song.toLowerCase()=='portal' || PlayState.SONG.song.toLowerCase()=='portal-potty')
 			{
 				portraitLeft = new FlxSprite(210, 240);
 				portraitLeft.frames = Paths.getSparrowAtlas('kingPortrait','shared');
