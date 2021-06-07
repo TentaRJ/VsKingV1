@@ -3176,20 +3176,6 @@ class PlayState extends MusicBeatState
 	override function stepHit()
 	{
 		super.stepHit();
-
-		switch (SONG.song.toLowerCase())
-		{
-			case 'limbo':
-			{
-				switch (curStep)
-				{
-					case 640:
-					{
-						switchCharacter("king", true, true);
-					}
-				}
-			}
-		}
 		
 		if (FlxG.sound.music.time > Conductor.songPosition + 20 || FlxG.sound.music.time < Conductor.songPosition - 20)
 		{
@@ -3297,6 +3283,11 @@ class PlayState extends MusicBeatState
 		if (curBeat % 8 == 7 && curSong == 'Bopeebo')
 		{
 			boyfriend.playAnim('hey', true);
+		}
+		
+		if (curStep == 640 && SONG.song.toLowerCase() == 'limbo')
+		{
+			switchCharacter("king", true, true);
 		}
 
 		if (curBeat % 16 == 15 && SONG.song == 'Tutorial' && dad.curCharacter == 'gf' && curBeat > 16 && curBeat < 48)

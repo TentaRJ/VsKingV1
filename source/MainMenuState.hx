@@ -210,6 +210,7 @@ class MainMenuState extends MusicBeatState
 					FlxTween.tween(logoBl,{x:1499, y:260}, 1, {ease:FlxEase.expoInOut});
 					new FlxTimer().start(1, function(swagTimer:FlxTimer){
 						remove(logoBl);
+						logoBl.kill();
 					});
 					
 
