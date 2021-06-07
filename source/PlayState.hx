@@ -2113,6 +2113,14 @@ class PlayState extends MusicBeatState
 	
 						daNote.active = false;
 
+						if (SONG.song.toLowerCase()=="portal"||SONG.song.toLowerCase()=="portal-potty")
+						{
+							if (health>0)
+							{
+								health -= 0.0299;
+							}
+						}
+
 						daNote.kill();
 						notes.remove(daNote, true);
 						daNote.destroy();

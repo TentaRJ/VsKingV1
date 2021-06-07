@@ -121,6 +121,7 @@ class MainMenuState extends MusicBeatState
 		logoBl.antialiasing = true;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
 		logoBl.animation.play('bump');
+		logoBl.scrollFactor.set(0, 0.25);
 		logoBl.updateHitbox();
 		add(logoBl);
 
