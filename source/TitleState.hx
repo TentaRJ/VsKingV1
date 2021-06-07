@@ -23,6 +23,7 @@ import flixel.util.FlxTimer;
 import io.newgrounds.NG;
 import lime.app.Application;
 import openfl.Assets;
+import Main._kingsave;
 
 #if windows
 import Discord.DiscordClient;
@@ -94,19 +95,29 @@ class TitleState extends MusicBeatState
 
 		Highscore.load();
 
-		if (FlxG.save.data.weekUnlocked != null)
+		if (_kingsave.data.dumpyFunny == null)
 		{
-			// FIX LATER!!!
-			// WEEK UNLOCK PROGRESSION!!
-			// StoryMenuState.weekUnlocked = FlxG.save.data.weekUnlocked;
-
-			if (StoryMenuState.weekUnlocked.length < 4)
-				StoryMenuState.weekUnlocked.insert(0, true);
-
-			// QUICK PATCH OOPS!
-			if (!StoryMenuState.weekUnlocked[0])
-				StoryMenuState.weekUnlocked[0] = true;
+			_kingsave.data.dumpyFunny = _kingsave.data.weekUnlocked[4];
+			_kingsave.flush();
 		}
+
+		#if debug
+		trace(_kingsave.data);
+		#end
+
+		// if (FlxG.save.data.weekUnlocked != null)
+		// {
+		// 	// FIX LATER!!!
+		// 	// WEEK UNLOCK PROGRESSION!!
+		// 	// StoryMenuState.weekUnlocked = FlxG.save.data.weekUnlocked;
+
+		// 	if (StoryMenuState.weekUnlocked.length < 4)
+		// 		StoryMenuState.weekUnlocked.insert(0, true);
+
+		// 	// QUICK PATCH OOPS!
+		// 	if (!StoryMenuState.weekUnlocked[0])
+		// 		StoryMenuState.weekUnlocked[0] = true;
+		// }
 
 		#if FREEPLAY
 		FlxG.switchState(new FreeplayState());
@@ -172,17 +183,14 @@ class TitleState extends MusicBeatState
 		// logoBl.screenCenter();
 		// logoBl.color = FlxColor.BLACK;
 
-		gfDance = new FlxSprite(FlxG.width * 0.4, FlxG.height * 0.07);
+		gfDance = new FlxSprite(730, 60);
 		gfDance.frames = Paths.getSparrowAtlas('characters/king', 'shared');
 		// gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 		// gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 		gfDance.animation.addByPrefix('idle', 'idle0', 24, true);
 		gfDance.animation.play('idle');
 		gfDance.antialiasing = true;
-
 		gfDance.scale.set(1.2, 1.2);
-		gfDance.x += 230;
-		gfDance.y += 40;
 		gfDance.updateHitbox();
 
 		add(gfDance);
@@ -390,12 +398,6 @@ class TitleState extends MusicBeatState
 		super.beatHit();
 
 		logoBl.animation.play('bump');
-		danceLeft = !danceLeft;
-
-		// if (danceLeft)
-		// 	gfDance.animation.play('danceRight');
-		// else
-		// 	gfDance.animation.play('danceLeft');
 
 		FlxG.log.add(curBeat);
 

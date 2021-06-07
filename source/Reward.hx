@@ -10,6 +10,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
+import Main._kingsave;
 
 class Reward extends MusicBeatState
 {
@@ -50,7 +51,8 @@ class Reward extends MusicBeatState
 		if (controls.ACCEPT)
 		{
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
-			leftState=true;
+			_kingsave.data.reward.leftState=true;
+			_kingsave.flush();
 			FlxG.switchState(new StoryMenuState());
 		}
 		super.update(elapsed);

@@ -79,6 +79,13 @@ class StoryMenuState extends MusicBeatState
 			weekNames[2] ="Finale";
 		}
 
+		if (_kingsave.data.dumpyFunny)
+		{
+			weekData[3] =['Portal-Potty'];
+			weekCharacters[3] =['blackout', 'bf', 'gf'];
+			weekNames[3] ="The True Finale";
+		}
+
 		if (FlxG.sound.music != null)
 		{
 			if (!FlxG.sound.music.playing)

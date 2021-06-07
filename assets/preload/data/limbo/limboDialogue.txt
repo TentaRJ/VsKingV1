@@ -1,6 +1,7 @@
-:dad:Listen, kid. It's not easy crossing into the land of the living.
-:dad:As far as I know, only one other person's ever managed to pull it off.
-:dad:You ready to try?
-:bf: Bapbeep peeba
-:dad: Alright then.
-:dad:Don't hold back!
+:dad:Well, looks like we're close enough,
+:dad:You're gonna have to repeat after me,
+:dad:especially because this ritual consumes a LOT of energy.
+:dad:You think you're up for it?
+:bf:bep skoobeebop
+:dad:It's do or die here.
+:dad:Don't blame me if you end up in the void.
