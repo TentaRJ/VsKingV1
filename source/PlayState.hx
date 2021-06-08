@@ -524,7 +524,7 @@ class PlayState extends MusicBeatState
 			if(FlxG.save.data.distractions)
 				{
 				// trailArea.scrollFactor.set();
-				var chartrail = new FlxTrail(dad, null, 45, 2, 0.5, 0.089);
+				var chartrail = new FlxTrail(dad, null, 50, 3, 0.7, 0.089);
 				// chartrail.changeValuesEnabled(false, false, false, false);
 				// chartrail.changeGraphic()
 				add(chartrail);
@@ -586,6 +586,10 @@ class PlayState extends MusicBeatState
 			dumpy.scale.set(0.8, 0.8);
 			dumpy.updateHitbox();
 			add(dumpy);
+
+			// dumpy trail; dumpy trail
+			// var dumpyTrail:FlxTrail = new FlxTrail(dumpy,null,6,0,0.6,0.069);
+			// add(dumpyTrail);
 
 		}
 
@@ -2117,7 +2121,7 @@ class PlayState extends MusicBeatState
 						{
 							if (health>0)
 							{
-								health -= 0.0299;
+								health -= 0.0182;
 							}
 						}
 
