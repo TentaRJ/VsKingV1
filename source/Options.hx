@@ -616,12 +616,33 @@ class Reset extends Option
 	{
 		_kingsave.data.weekUnlocked = [true, true, false, false];
 		_kingsave.data.dumpyFunny = false;
+		_kingsave.data.cutscenes=true;
 		trace("reset all data!");
 		trace(_kingsave.data.weekUnlocked);
 		trace(_kingsave.data.dumpyFunny);
+		trace(_kingsave.data.cutscenes);
 		_kingsave.flush();
 		return true;
 	}
 	private override function updateDisplay():String
 		return "Reset?";
+}
+class Cutscenes extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+	
+	public override function press():Bool
+	{
+		_kingsave.data.cutscenes != _kingsave.data.cutscenes;
+		trace('Cutscenes : ' + _kingsave.data.cutscenes);
+		display = updateDisplay();
+		return true;
+	}
+	
+	private override function updateDisplay():String
+		return "Cutscenes " + (_kingsave.data.cutscenes ? "on" : "off");
 }

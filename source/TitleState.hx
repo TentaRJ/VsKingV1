@@ -95,11 +95,11 @@ class TitleState extends MusicBeatState
 
 		Highscore.load();
 
-		if (_kingsave.data.dumpyFunny == null)
-		{
-			_kingsave.data.dumpyFunny = _kingsave.data.weekUnlocked[4];
-			_kingsave.flush();
-		}
+		// if (_kingsave.data.dumpyFunny == null && _kingsave.data.weekUnlocked[4] != null)
+		// {
+		// 	_kingsave.data.dumpyFunny = _kingsave.data.weekUnlocked[4];
+		// 	_kingsave.flush();
+		// }
 
 		#if debug
 		trace(_kingsave.data);

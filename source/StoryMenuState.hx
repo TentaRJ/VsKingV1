@@ -315,7 +315,7 @@ class StoryMenuState extends MusicBeatState
 			trace(curWeek);
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
-				if (curWeek == 1)
+				if (curWeek == 1 && _kingsave.data.cutscenes == true)
 				{
 					trace("Come on load the video");
 					// LoadingState.loadAndSwitchState(new PlayState());

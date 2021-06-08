@@ -108,7 +108,7 @@ class PlayState extends MusicBeatState
 	public static var dad:Character;
 	public static var gf:Character;
 	public static var boyfriend:Boyfriend;
-
+	public static var king:Character;
 	public var notes:FlxTypedGroup<Note>;
 	private var unspawnNotes:Array<Note> = [];
 
@@ -599,6 +599,15 @@ class PlayState extends MusicBeatState
 
 		add(dad);
 		add(boyfriend);
+
+
+
+		if (SONG.song.toLowerCase() == "limbo")
+		{
+			king = new Character(84, 100, "king");
+			king.visible = false;
+			add(king);
+		}
 		
 		if (loadRep)
 		{
@@ -2089,12 +2098,20 @@ class PlayState extends MusicBeatState
 						{
 							case 2:
 								dad.playAnim('singUP' + altAnim, true);
+								if (SONG.song.toLowerCase() == "limbo")
+									king.playAnim('singUP' + altAnim, true);
 							case 3:
 								dad.playAnim('singRIGHT' + altAnim, true);
+								if (SONG.song.toLowerCase() == "limbo")
+									king.playAnim('singRIGHT' + altAnim, true);
 							case 1:
 								dad.playAnim('singDOWN' + altAnim, true);
+								if (SONG.song.toLowerCase() == "limbo")
+									king.playAnim('singDOWN' + altAnim, true);
 							case 0:
 								dad.playAnim('singLEFT' + altAnim, true);
+								if (SONG.song.toLowerCase() == "limbo")
+									king.playAnim('singLEFT' + altAnim, true);
 						}
 						player2Strums.forEach(function(spr:FlxSprite)
 							{
@@ -2314,15 +2331,24 @@ class PlayState extends MusicBeatState
 									_kingsave.data.weekUnlocked = StoryMenuState.weekUnlocked;
 									_kingsave.flush();
 									trace("Good!");
-									if (!_kingsave.data.reward.leftState && StoryMenuState.weekUnlocked[2])
+									if (!_kingsave.data.reward.leftState && StoryMenuState.weekUnlocked[2] && _kingsave.data.cutscenes)
 										FlxG.switchState(new VideoState("assets/videos/good.webm", new Reward()));
+									else if (!_kingsave.data.reward.leftState && StoryMenuState.weekUnlocked[2] && !_kingsave.data.cutscenes)
+										FlxG.switchState(new Reward());
 									else
-										FlxG.switchState(new VideoState("assets/videos/good.webm", new StoryMenuState()));
+										if (_kingsave.data.cutscenes==true)
+											FlxG.switchState(new VideoState("assets/videos/good.webm", new StoryMenuState()));
+										else 
+											FlxG.switchState(new StoryMenuState());
+
 								}
 								else
 								{
 									trace("Bad!");
-									FlxG.switchState(new VideoState("assets/videos/bad.webm", new StoryMenuState()));
+									if (_kingsave.data.cutscenes)
+										FlxG.switchState(new VideoState("assets/videos/bad.webm", new StoryMenuState()));
+									else 
+										FlxG.switchState(new StoryMenuState());
 								}
 							}
 							case "portal":
@@ -3303,7 +3329,9 @@ class PlayState extends MusicBeatState
 		
 		if (curStep == 640 && SONG.song.toLowerCase() == 'limbo')
 		{
-			switchCharacter("king", true, true);
+			dad.visible=false;
+			king.visible=true;
+			// switchCharacter("king", true, true);
 		}
 
 		if (curBeat % 16 == 15 && SONG.song == 'Tutorial' && dad.curCharacter == 'gf' && curBeat > 16 && curBeat < 48)
