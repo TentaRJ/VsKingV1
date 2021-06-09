@@ -54,7 +54,7 @@ class FreeplayState extends MusicBeatState
 			songs.push(new SongMetadata("Portal", 2, "blackout"));
 		}
 
-		if (_kingsave.data.weekUnlocked[4])
+		if (StoryMenuState.weekUnlocked[4])
 		{
 			songs.push(new SongMetadata("Portal-Potty", 3, "blackout"));
 		}

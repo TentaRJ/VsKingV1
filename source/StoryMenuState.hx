@@ -70,7 +70,7 @@ class StoryMenuState extends MusicBeatState
 		transOut = FlxTransitionableState.defaultTransOut;
 
 		if (_kingsave.data.weekUnlocked != null)
-			weekUnlocked = _kingsave.data.weekUnlocked;
+			StoryMenuState.weekUnlocked = _kingsave.data.weekUnlocked;
 
 		if (weekUnlocked[2])
 		{
@@ -79,7 +79,7 @@ class StoryMenuState extends MusicBeatState
 			weekNames[2] ="Finale";
 		}
 
-		if (_kingsave.data.weekUnlocked[4])
+		if (weekUnlocked[4])
 		{
 			weekData[3] =['Portal-Potty'];
 			weekCharacters[3] =['blackout', 'bf', 'gf'];
