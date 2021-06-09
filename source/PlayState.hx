@@ -54,7 +54,8 @@ import lime.utils.Assets;
 import openfl.display.BlendMode;
 import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
-import Main._kingsave;
+
+import TitleState._kingsave;
 
 #if windows
 import Discord.DiscordClient;

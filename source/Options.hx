@@ -7,7 +7,8 @@ import Controls.KeyboardScheme;
 import flixel.FlxG;
 import openfl.display.FPS;
 import openfl.Lib;
-import Main._kingsave;
+
+import TitleState._kingsave;
 
 class OptionCatagory
 {

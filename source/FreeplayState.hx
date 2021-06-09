@@ -9,7 +9,8 @@ import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import lime.utils.Assets;
-import Main._kingsave;
+
+import TitleState._kingsave;
 
 
 #if windows

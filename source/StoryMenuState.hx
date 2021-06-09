@@ -13,7 +13,8 @@ import flixel.tweens.FlxEase;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.net.curl.CURLCode;
-import Main._kingsave;
+
+import TitleState._kingsave;
 
 #if windows
 import Discord.DiscordClient;

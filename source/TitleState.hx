@@ -1,5 +1,6 @@
 package;
 
+import flixel.util.FlxSave;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -23,7 +24,6 @@ import flixel.util.FlxTimer;
 import io.newgrounds.NG;
 import lime.app.Application;
 import openfl.Assets;
-import Main._kingsave;
 
 #if windows
 import Discord.DiscordClient;
@@ -48,6 +48,8 @@ class TitleState extends MusicBeatState
 	var curWacky:Array<String> = [];
 
 	var wackyImage:FlxSprite;
+
+	static public var _kingsave:FlxSave;
 
 	override public function create():Void
 	{
@@ -95,15 +97,16 @@ class TitleState extends MusicBeatState
 
 		Highscore.load();
 
+		// king save stuff
+		_kingsave = new FlxSave();
+		_kingsave.bind('king', 'vsKing');
+
 		// if (_kingsave.data.dumpyFunny == null && _kingsave.data.weekUnlocked[4] != null)
 		// {
 		// 	_kingsave.data.dumpyFunny = _kingsave.data.weekUnlocked[4];
 		// 	_kingsave.flush();
 		// }
 
-		#if debug
-		trace(_kingsave.data);
-		#end
 
 		// if (FlxG.save.data.weekUnlocked != null)
 		// {

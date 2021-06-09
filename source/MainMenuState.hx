@@ -16,7 +16,8 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import io.newgrounds.NG;
 import lime.app.Application;
-import Main._kingsave;
+
+import TitleState._kingsave;
 
 #if windows
 import Discord.DiscordClient;
