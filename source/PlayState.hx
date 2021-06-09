@@ -701,7 +701,7 @@ class PlayState extends MusicBeatState
 		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
 			'health', 0, 2);
 		healthBar.scrollFactor.set();
-		healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
+		healthBar.createFilledBar(0xFFBB7EFC, 0xFF66FF33);
 		// healthBar
 		add(healthBar);
 
@@ -3329,7 +3329,7 @@ class PlayState extends MusicBeatState
 				dad.visible=false;
 				king.visible=true;
 				// switchCharacter("king", true, true);
-			}
+			});
 		}
 
 		if (curBeat % 16 == 15 && SONG.song == 'Tutorial' && dad.curCharacter == 'gf' && curBeat > 16 && curBeat < 48)
