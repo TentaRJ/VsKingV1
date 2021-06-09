@@ -65,12 +65,12 @@ jobs:
         run: haxelib run lime build linux
       - name: Archive
         run: tar -czf bin.tar.gz 'export/release/linux/bin' 
-     - name: Publish Artifact
-       uses: actions/upload-artifact@v2
-       with:
-         name: linuxBuild
-         path: bin.tar.gz
-         retention-days: 1
+      - name: Publish Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: linuxBuild
+          path: bin.tar.gz
+          retention-days: 1
   buildWindows:
     runs-on: windows-latest
     
@@ -112,12 +112,12 @@ jobs:
         run: haxelib run lime build windows
       - name: Archive
         run: tar -czf bin.tar.gz export/release/windows/bin
-     - name: Publish Artifact
-       uses: actions/upload-artifact@v2
-       with:
-         name: windowsBuild
-         path: bin.tar.gz
-         retention-days: 1
+      - name: Publish Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: windowsBuild
+          path: bin.tar.gz
+          retention-days: 1
   buildMac:
     runs-on: macos-latest
 
@@ -158,9 +158,9 @@ jobs:
         run: haxelib run lime build mac 
       - name: Archive
         run: tar -czf bin.tar.gz export/release/macos/bin
-     - name: Publish Artifact
-       uses: actions/upload-artifact@v2
-       with:
-         name: macBuild
-         path: bin.tar.gz
-         retention-days: 1
+      - name: Publish Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: macBuild
+          path: bin.tar.gz
+          retention-days: 1
