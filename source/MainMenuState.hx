@@ -150,7 +150,7 @@ class MainMenuState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		#if debug
+		// #if debug
 		if (FlxG.keys.justPressed.R)
 		{
 			new FlxTimer().start(0.05, function(tmr:FlxTimer)
@@ -171,7 +171,7 @@ class MainMenuState extends MusicBeatState
 				_kingsave.flush();
 			});
 		}
-		#end
+		// #end
 
 		if (FlxG.sound.music.volume < 0.8)
 		{

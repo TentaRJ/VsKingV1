@@ -616,12 +616,9 @@ class Reset extends Option
 	public override function press():Bool
 	{
 		_kingsave.data.weekUnlocked = [true, true, false, false, false];
-		_kingsave.data.dumpyFunny = false;
-		_kingsave.data.cutscenes=true;
-		trace("reset all data!");
 		trace(_kingsave.data.weekUnlocked);
-		trace(_kingsave.data.cutscenes);
 		_kingsave.flush();
+		trace("reset all data!");
 		return true;
 	}
 	private override function updateDisplay():String

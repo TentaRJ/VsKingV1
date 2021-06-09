@@ -2329,6 +2329,7 @@ class PlayState extends MusicBeatState
 								#end
 								if (accuracy > 70 && !FlxG.save.data.botplay && storyDifficulty != 0)
 								{
+									trace("Good save");
 									StoryMenuState.weekUnlocked[2] = true;
 									_kingsave.data.weekUnlocked = StoryMenuState.weekUnlocked;
 									_kingsave.flush();
@@ -2347,6 +2348,7 @@ class PlayState extends MusicBeatState
 							}
 							case "portal":
 							{
+								trace("portal save");
 								StoryMenuState.weekUnlocked[3] = true;
 								_kingsave.data.weekUnlocked = StoryMenuState.weekUnlocked;
 								_kingsave.flush();

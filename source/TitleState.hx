@@ -97,9 +97,12 @@ class TitleState extends MusicBeatState
 
 		Highscore.load();
 
+		trace("lets load the save");
+
 		// king save stuff
 		_kingsave = new FlxSave();
 		_kingsave.bind('king', 'vsKing');
+		trace(_kingsave.path);
 
 		// if (_kingsave.data.dumpyFunny == null && _kingsave.data.weekUnlocked[4] != null)
 		// {

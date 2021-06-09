@@ -69,7 +69,7 @@ class StoryMenuState extends MusicBeatState
 
 		transIn = FlxTransitionableState.defaultTransIn;
 		transOut = FlxTransitionableState.defaultTransOut;
-
+		trace("story load save");
 		if (_kingsave.data.weekUnlocked != null)
 			StoryMenuState.weekUnlocked = _kingsave.data.weekUnlocked;
 

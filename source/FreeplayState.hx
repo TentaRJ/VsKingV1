@@ -46,7 +46,7 @@ class FreeplayState extends MusicBeatState
 			var data:Array<String> = initSonglist[i].split(':');
 			songs.push(new SongMetadata(data[0], Std.parseInt(data[2]), data[1]));
 		}
-
+		trace("freeplay load save");
 		if (_kingsave.data.weekUnlocked != null)
 			StoryMenuState.weekUnlocked = _kingsave.data.weekUnlocked;
 
