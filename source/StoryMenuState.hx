@@ -79,7 +79,7 @@ class StoryMenuState extends MusicBeatState
 			weekNames[2] ="Finale";
 		}
 
-		if (_kingsave.data.dumpyFunny)
+		if (_kingsave.data.weekUnlocked[4])
 		{
 			weekData[3] =['Portal-Potty'];
 			weekCharacters[3] =['blackout', 'bf', 'gf'];

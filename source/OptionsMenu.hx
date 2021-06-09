@@ -57,7 +57,7 @@ class OptionsMenu extends MusicBeatState
 		]),
 
 		new OptionCatagory("Mod Specific", [
-			new Cutscenes("Enable or disable cutscenes for low end computers."),
+			// new Cutscenes("Enable or disable cutscenes for low end computers."),
 			new Reset("Reset all of this mod's data in case something happened.")
 		])
 		

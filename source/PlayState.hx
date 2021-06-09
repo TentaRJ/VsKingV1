@@ -1678,7 +1678,7 @@ class PlayState extends MusicBeatState
 			#end
 		}
 
-		if (FlxG.keys.justPressed.ZERO)
+		if (FlxG.keys.justPressed.FOUR)
 		{
 			FlxG.switchState(new AnimationDebug(SONG.player1));
 			#if windows
@@ -2260,7 +2260,7 @@ class PlayState extends MusicBeatState
 		if (FlxG.random.bool(15) && SONG.song.toLowerCase() == "portal-potty")
 			{
 			trace("You won the RNG!!");
-			_kingsave.data.dumpyFunny = true;
+			_kingsave.data.weekUnlocked[4];
 			_kingsave.flush();
 			}
 			else {trace("No RNG!");}
@@ -2331,24 +2331,16 @@ class PlayState extends MusicBeatState
 									_kingsave.data.weekUnlocked = StoryMenuState.weekUnlocked;
 									_kingsave.flush();
 									trace("Good!");
-									if (!_kingsave.data.reward.leftState && StoryMenuState.weekUnlocked[2] && _kingsave.data.cutscenes)
+									if (!_kingsave.data.reward.leftState)
 										FlxG.switchState(new VideoState("assets/videos/good.webm", new Reward()));
-									else if (!_kingsave.data.reward.leftState && StoryMenuState.weekUnlocked[2] && !_kingsave.data.cutscenes)
-										FlxG.switchState(new Reward());
 									else
-										if (_kingsave.data.cutscenes==true)
-											FlxG.switchState(new VideoState("assets/videos/good.webm", new StoryMenuState()));
-										else 
-											FlxG.switchState(new StoryMenuState());
+										FlxG.switchState(new StoryMenuState());
 
 								}
 								else
 								{
 									trace("Bad!");
-									if (_kingsave.data.cutscenes)
-										FlxG.switchState(new VideoState("assets/videos/bad.webm", new StoryMenuState()));
-									else 
-										FlxG.switchState(new StoryMenuState());
+									FlxG.switchState(new VideoState("assets/videos/bad.webm", new StoryMenuState()));
 								}
 							}
 							case "portal":
@@ -2357,6 +2349,7 @@ class PlayState extends MusicBeatState
 								_kingsave.data.weekUnlocked = StoryMenuState.weekUnlocked;
 								_kingsave.flush();
 
+								FlxG.sound.playMusic(Paths.music('freakyMenu'));
 								FlxG.switchState(new StoryMenuState());
 							}
 							default:

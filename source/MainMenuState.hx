@@ -155,10 +155,8 @@ class MainMenuState extends MusicBeatState
 			new FlxTimer().start(0.05, function(tmr:FlxTimer)
 			{
 				trace("reset!");
-				_kingsave.data.weekUnlocked = [true, true, false, false];
-				_kingsave.data.dumpyFunny=false;
+				_kingsave.data.weekUnlocked = [true, true, false, false, false];
 				trace(_kingsave.data.weekUnlocked);
-				trace(_kingsave.data.dumpyFunny);
 				_kingsave.flush();
 			});
 		}
@@ -167,10 +165,8 @@ class MainMenuState extends MusicBeatState
 			new FlxTimer().start(0.05, function(tmr:FlxTimer)
 			{
 				trace("t!");
-				_kingsave.data.weekUnlocked = [true, true, true, true];
-				_kingsave.data.dumpyFunny=true;
+				_kingsave.data.weekUnlocked = [true, true, true, true, true];
 				trace(_kingsave.data.weekUnlocked);
-				trace(_kingsave.data.dumpyFunny);
 				_kingsave.flush();
 			});
 		}
