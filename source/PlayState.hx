@@ -2260,7 +2260,8 @@ class PlayState extends MusicBeatState
 		if (FlxG.random.bool(15) && SONG.song.toLowerCase() == "portal-potty")
 			{
 			trace("You won the RNG!!");
-			_kingsave.data.weekUnlocked[4];
+			StoryMenuState.weekUnlocked[4] = true;
+			_kingsave.data.weekUnlocked = StoryMenuState.weekUnlocked;
 			_kingsave.flush();
 			}
 			else {trace("No RNG!");}
@@ -3320,11 +3321,15 @@ class PlayState extends MusicBeatState
 			boyfriend.playAnim('hey', true);
 		}
 		
+		// something something deez nuts joke
 		if (curStep == 640 && SONG.song.toLowerCase() == 'limbo')
 		{
-			dad.visible=false;
-			king.visible=true;
-			// switchCharacter("king", true, true);
+			new FlxTimer().start(1.3, function(swagTimer:FlxTimer)
+			{
+				dad.visible=false;
+				king.visible=true;
+				// switchCharacter("king", true, true);
+			}
 		}
 
 		if (curBeat % 16 == 15 && SONG.song == 'Tutorial' && dad.curCharacter == 'gf' && curBeat > 16 && curBeat < 48)
