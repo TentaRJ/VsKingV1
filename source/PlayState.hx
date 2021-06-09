@@ -604,7 +604,7 @@ class PlayState extends MusicBeatState
 
 		if (SONG.song.toLowerCase() == "limbo")
 		{
-			king = new Character(84, 100, "king");
+			king = new Character(84, 400, "king");
 			king.visible = false;
 			add(king);
 		}
@@ -854,10 +854,10 @@ class PlayState extends MusicBeatState
 		add(kingCutscene);
 
 		// da cutscene
-		FlxG.sound.play(Paths.sound('bwomp', 'weekcustom'),0.89,false);
 		kingCutscene.animation.play("idle", true);
 		new FlxTimer().start(2.1, function(swagTimer:FlxTimer)
 			{
+				FlxG.sound.play(Paths.sound('bwomp', 'weekcustom'),0.89,false);
 				kingCutscene.animation.play("arm-up");
 				new FlxTimer().start(0.6, function(swagTimer:FlxTimer)
 				{
