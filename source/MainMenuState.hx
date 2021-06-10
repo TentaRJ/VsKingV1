@@ -32,6 +32,7 @@ class MainMenuState extends MusicBeatState
 	var menuItems:FlxTypedGroup<FlxSprite>;
 
 	var logoBl:FlxSprite;
+	var stickerFunny:FlxSprite;
 
 	#if !switch
 	var optionShit:Array<String> = ['story mode', 'freeplay', 'options'];
@@ -110,7 +111,7 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollow, null, 0.60 * (60 / FlxG.save.data.fpsCap));
 
-		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "VS. King Full Week", 0);
+		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, "VS. King Full Week -- Custom Kade Engine (Based on Version 1.4.2)", 0);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
@@ -126,11 +127,21 @@ class MainMenuState extends MusicBeatState
 		logoBl.updateHitbox();
 		add(logoBl);
 
-		new FlxTimer().start(0.29, function(swagtimer:FlxTimer)
+		stickerFunny = new FlxSprite(1299, 260).loadGraphic(Paths.image('stickerFunny', 'preload'));
+		stickerFunny.scrollFactor.set(0,0);
+		stickerFunny.antialiasing=true;
+		stickerFunny.scrollFactor.set(0, 0.25);
+		stickerFunny.updateHitbox();
+		add(stickerFunny);
+
+		new FlxTimer().start(0.29, function(swagTimer:FlxTimer)
 		{
 			// FlxTween.tween(menuItems,{x:20, y:60}, 1, {ease:FlxEase.expoInOut});
 
-			FlxTween.tween(logoBl,{x:699, y:260}, 1, {ease:FlxEase.expoInOut});
+			FlxTween.tween(logoBl,{x:699, y:120}, 1, {ease:FlxEase.expoInOut});
+			new FlxTimer().start(0.2, function(swagTimer:FlxTimer){
+				FlxTween.tween(stickerFunny,{x:999, y:120}, 1, {ease:FlxEase.expoInOut});
+			});
 		});
 
 		// NG.core.calls.event.logEvent('swag').send();
@@ -161,18 +172,27 @@ class MainMenuState extends MusicBeatState
 				_kingsave.flush();
 			});
 		}
-		if (FlxG.keys.justPressed.T)
+		// if (FlxG.keys.justPressed.T)
+		// {
+		// 	new FlxTimer().start(0.05, function(tmr:FlxTimer)
+		// 	{
+		// 		trace("t!");
+		// 		_kingsave.data.weekUnlocked = [true, true, true, true, true];
+		// 		trace(_kingsave.data.weekUnlocked);
+		// 		_kingsave.flush();
+		// 	});
+		// }
+		// #end
+		if (FlxG.keys.pressed.T && FlxG.keys.pressed.A && FlxG.keys.pressed.C)
 		{
 			new FlxTimer().start(0.05, function(tmr:FlxTimer)
 			{
-				trace("t!");
+				trace("TAC!");
 				_kingsave.data.weekUnlocked = [true, true, true, true, true];
 				trace(_kingsave.data.weekUnlocked);
 				_kingsave.flush();
 			});
 		}
-		// #end
-
 		if (FlxG.sound.music.volume < 0.8)
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
@@ -213,9 +233,11 @@ class MainMenuState extends MusicBeatState
 					selectedSomethin = true;
 					FlxG.sound.play(Paths.sound('confirmMenu'));
 					
-					FlxTween.tween(logoBl,{x:1499, y:260}, 1, {ease:FlxEase.expoInOut});
+					FlxTween.tween(logoBl,{x:1499, y:320}, 1, {ease:FlxEase.expoInOut});
+					FlxTween.tween(stickerFunny,{x:1499, y:120}, 1, {ease:FlxEase.expoInOut});
 					new FlxTimer().start(1, function(swagTimer:FlxTimer){
 						remove(logoBl);
+						remove(stickerFunny);
 					});
 					
 

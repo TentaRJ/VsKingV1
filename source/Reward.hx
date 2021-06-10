@@ -53,7 +53,7 @@ class Reward extends MusicBeatState
 		{
 			trace("reward save");
 			FlxG.sound.playMusic(Paths.music('freakyMenu'));
-			_kingsave.data.reward.leftState=true;
+			_kingsave.data.leftState=true;
 			_kingsave.flush();
 			FlxG.switchState(new StoryMenuState());
 		}
