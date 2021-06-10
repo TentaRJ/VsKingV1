@@ -320,12 +320,12 @@ class StoryMenuState extends MusicBeatState
 				{
 					trace("Come on load the video");
 					// LoadingState.loadAndSwitchState(new PlayState());
-					LoadingState.loadAndSwitchState(new VideoState("assets/videos/intro.webm", new PlayState()));
+					LoadingState.loadAndSwitchState(new VideoState("assets/videos/intro.webm", new PlayState()), true);
 				}
 				else
 				{
 					trace('Haha no :)');
-					LoadingState.loadAndSwitchState(new PlayState());
+					LoadingState.loadAndSwitchState(new PlayState(), true);
 				}
 			});
 		}

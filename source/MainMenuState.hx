@@ -127,10 +127,11 @@ class MainMenuState extends MusicBeatState
 		logoBl.updateHitbox();
 		add(logoBl);
 
-		stickerFunny = new FlxSprite(1299, 260).loadGraphic(Paths.image('stickerFunny', 'preload'));
+		stickerFunny = new FlxSprite(1299, 260).loadGraphic(Paths.image('stickerFunnyPublic', 'preload'));
 		stickerFunny.scrollFactor.set(0,0);
 		stickerFunny.antialiasing=true;
 		stickerFunny.scrollFactor.set(0, 0.25);
+		stickerFunny.setGraphicSize(285);
 		stickerFunny.updateHitbox();
 		add(stickerFunny);
 

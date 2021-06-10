@@ -2258,7 +2258,7 @@ class PlayState extends MusicBeatState
 	function endSong():Void
 	{
 		//15% Chance
-		if (FlxG.random.bool(50) && SONG.song.toLowerCase() == "portal-potty")
+		if (FlxG.random.bool(15) && SONG.song.toLowerCase() == "portal-potty")
 			{
 			trace("You won the RNG!!");
 			StoryMenuState.weekUnlocked[4] = true;
