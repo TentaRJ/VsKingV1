@@ -47,6 +47,9 @@ class MainMenuState extends MusicBeatState
 	public static var nightly:String = "";
 
 	public static var kadeEngineVer:String = "1.4.2" + nightly;
+	public static var kingVer:String = "1.1.0";
+	public static var kingTest:Bool = false;
+	public static var versionResult:String;
 	public static var gameVer:String = "0.2.7.1";
 
 	var magenta:FlxSprite;
@@ -141,7 +144,42 @@ class MainMenuState extends MusicBeatState
 
 			FlxTween.tween(logoBl,{x:699, y:120}, 1, {ease:FlxEase.expoInOut});
 			new FlxTimer().start(0.2, function(swagTimer:FlxTimer){
-				FlxTween.tween(stickerFunny,{x:999, y:120}, 1, {ease:FlxEase.expoInOut});
+				// FlxTween.tween(stickerFunny,{x:999, y:120}, 1, {ease:FlxEase.expoInOut});
+				new FlxTimer().start(1.4, function(tmr:FlxTimer)
+					{
+						// Get current version of Kade Engine
+		
+						var http = new haxe.Http("https://raw.githubusercontent.com/KadeDev/Kade-Engine/master/version.downloadMe");
+						var returnedData:Array<String> = [];
+						
+						http.onData = function (data:String)
+						{
+							returnedData[0] = data.substring(0, data.indexOf(';'));
+							returnedData[1] = data.substring(data.indexOf('-'), data.length);
+
+							if (MainMenuState.kingTest)
+							{
+								versionResult="This version is a test of the build " + kingVer + "! Please report any issues to Github!";
+							}
+							else if (!MainMenuState.kingVer.contains(returnedData[0].trim()) && !MainMenuState.kingTest)
+							{
+								trace('outdated lmao! ' + returnedData[0] + ' != ' + kingVer);
+								trace(returnedData[1]);
+								versionResult="";
+							}
+							else
+							{
+								versionResult="";
+							}
+						}
+						http.onError = function (error) {
+							trace('error: $error');
+							versionResult="Error when checking for updates! Your version is " + kingVer + "!";
+						}
+
+						  
+						http.request();
+					  });
 			});
 		});
 
