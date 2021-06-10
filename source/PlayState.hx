@@ -54,7 +54,8 @@ import lime.utils.Assets;
 import openfl.display.BlendMode;
 import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
-import Main._kingsave;
+
+import TitleState._kingsave;
 
 #if windows
 import Discord.DiscordClient;
@@ -2324,18 +2325,27 @@ class PlayState extends MusicBeatState
 							case "limbo":
 							{	
 								#if debug
-								misses = 4;
+								accuracy = 90;
+								trace(accuracy);
 								#end
-								if (accuracy > 70 && !FlxG.save.data.botplay && storyDifficulty != 0)
+								//  && !FlxG.save.data.botplay
+								if (accuracy > 70 && storyDifficulty != 0)
 								{
+									trace("Good save");
 									StoryMenuState.weekUnlocked[2] = true;
 									_kingsave.data.weekUnlocked = StoryMenuState.weekUnlocked;
 									_kingsave.flush();
 									trace("Good!");
-									if (!_kingsave.data.reward.leftState)
+									if (_kingsave.data.leftState != true)
+									{
+										trace("video!");
 										FlxG.switchState(new VideoState("assets/videos/good.webm", new Reward()));
+									}
 									else
-										FlxG.switchState(new StoryMenuState());
+									{
+										trace("reward already seen!");
+										FlxG.switchState(new VideoState("assets/videos/good.webm", new StoryMenuState()));
+									}
 
 								}
 								else
@@ -2346,6 +2356,7 @@ class PlayState extends MusicBeatState
 							}
 							case "portal":
 							{
+								trace("portal save");
 								StoryMenuState.weekUnlocked[3] = true;
 								_kingsave.data.weekUnlocked = StoryMenuState.weekUnlocked;
 								_kingsave.flush();

@@ -1,7 +1,8 @@
 package;
 
 import flixel.FlxG;
-import Main._kingsave;
+
+import flixel.util.FlxSave;
 
 class Highscore
 {
@@ -61,8 +62,8 @@ class Highscore
 	{
 		// Reminder that I don't need to format this song, it should come formatted!
 		songScores.set(song, score);
-		_kingsave.data.songScores = songScores;
-		_kingsave.flush();
+		FlxG.save.data.songScores = songScores;
+		FlxG.save.flush();
 	}
 
 	public static function formatSong(song:String, diff:Int):String
@@ -95,9 +96,9 @@ class Highscore
 
 	public static function load():Void
 	{
-		if (_kingsave.data.songScores != null)
+		if (FlxG.save.data.songScores != null)
 		{
-			songScores = _kingsave.data.songScores;
+			songScores = FlxG.save.data.songScores;
 		}
 	}
 }

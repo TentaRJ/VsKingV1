@@ -13,7 +13,8 @@ import flixel.tweens.FlxEase;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.net.curl.CURLCode;
-import Main._kingsave;
+
+import TitleState._kingsave;
 
 #if windows
 import Discord.DiscordClient;
@@ -68,7 +69,7 @@ class StoryMenuState extends MusicBeatState
 
 		transIn = FlxTransitionableState.defaultTransIn;
 		transOut = FlxTransitionableState.defaultTransOut;
-
+		trace("story load save");
 		if (_kingsave.data.weekUnlocked != null)
 			StoryMenuState.weekUnlocked = _kingsave.data.weekUnlocked;
 
@@ -315,16 +316,16 @@ class StoryMenuState extends MusicBeatState
 			trace(curWeek);
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
-				if (curWeek == 1 && _kingsave.data.cutscenes == true)
+				if (curWeek == 1)
 				{
 					trace("Come on load the video");
 					// LoadingState.loadAndSwitchState(new PlayState());
-					LoadingState.loadAndSwitchState(new VideoState("assets/videos/intro.webm", new PlayState()));
+					LoadingState.loadAndSwitchState(new VideoState("assets/videos/intro.webm", new PlayState()), true);
 				}
 				else
 				{
 					trace('Haha no :)');
-					LoadingState.loadAndSwitchState(new PlayState());
+					LoadingState.loadAndSwitchState(new PlayState(), true);
 				}
 			});
 		}

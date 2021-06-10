@@ -7,7 +7,8 @@ import Controls.KeyboardScheme;
 import flixel.FlxG;
 import openfl.display.FPS;
 import openfl.Lib;
-import Main._kingsave;
+
+import TitleState._kingsave;
 
 class OptionCatagory
 {
@@ -614,13 +615,12 @@ class Reset extends Option
 
 	public override function press():Bool
 	{
+		_kingsave.erase();
 		_kingsave.data.weekUnlocked = [true, true, false, false, false];
-		_kingsave.data.dumpyFunny = false;
-		_kingsave.data.cutscenes=true;
-		trace("reset all data!");
-		trace(_kingsave.data.weekUnlocked);
-		trace(_kingsave.data.cutscenes);
+		_kingsave.data.leftState=false;
+		trace(_kingsave.data);
 		_kingsave.flush();
+		trace("reset all data!");
 		return true;
 	}
 	private override function updateDisplay():String
