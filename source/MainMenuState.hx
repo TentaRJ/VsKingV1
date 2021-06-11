@@ -185,18 +185,18 @@ class MainMenuState extends MusicBeatState
 							versionResult="No updates found! Your version is" + kingVer + "!";
 						}
 
+						var ghUpdateText:FlxText = new FlxText(1299, FlxG.height - 48, 0, versionResult);
+						ghUpdateText.scrollFactor.set();
+						ghUpdateText.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+						add(ghUpdateText);
+	
+						FlxTween.tween(ghUpdateText,{x:5}, 1, {ease:FlxEase.expoOut});
+
 					}
 					http.onError = function (error) {
 						trace('error: $error');
 						versionResult="Error when checking for updates! Your version is " + kingVer + "!";
 					}
-
-					var ghUpdateText:FlxText = new FlxText(1299, FlxG.height - 48, 0, versionResult);
-					ghUpdateText.scrollFactor.set();
-					ghUpdateText.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-					add(ghUpdateText);
-
-					FlxTween.tween(ghUpdateText,{x:5}, 1, {ease:FlxEase.expoOut});
 
 					http.request();
 					}	
