@@ -48,6 +48,7 @@ class TitleState extends MusicBeatState
 	var curWacky:Array<String> = [];
 
 	var wackyImage:FlxSprite;
+	var bg:FlxSprite;
 
 	static public var _kingsave:FlxSave;
 
@@ -174,10 +175,21 @@ class TitleState extends MusicBeatState
 		Conductor.changeBPM(102);
 		persistentUpdate = true;
 
-		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-		// bg.antialiasing = true;
-		// bg.setGraphicSize(Std.int(bg.width * 0.6));
-		// bg.updateHitbox();
+		if (MainMenuState.kingTest)
+		{
+			bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GRAY);
+			// bg.antialiasing = true;
+			// bg.setGraphicSize(Std.int(bg.width * 0.6));
+			// bg.updateHitbox();
+		}
+		else
+		{
+			bg= new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+			// bg.antialiasing = true;
+			// bg.setGraphicSize(Std.int(bg.width * 0.6));
+			// bg.updateHitbox();
+		}
+
 		add(bg);
 
 		logoBl = new FlxSprite(-150, -100);
@@ -326,39 +338,41 @@ class TitleState extends MusicBeatState
 			transitioning = true;
 			// FlxG.sound.music.stop();
 
-			new FlxTimer().start(2, function(tmr:FlxTimer)
-			{
-				// Get current version of Kade Engine
+		// 	new FlxTimer().start(2, function(tmr:FlxTimer)
+		// 	{
+		// 		// Get current version of Kade Engine
 
-				//var http = new haxe.Http("https://raw.githubusercontent.com/KadeDev/Kade-Engine/master/version.downloadMe");
-				var http = new haxe.Http("https://raw.githubusercontent.com/KadeDev/Kade-Engine/patchnotes/version.downloadMe");
-				var returnedData:Array<String> = [];
+		// 		//var http = new haxe.Http("https://raw.githubusercontent.com/KadeDev/Kade-Engine/master/version.downloadMe");
+		// 		var http = new haxe.Http("https://raw.githubusercontent.com/KadeDev/Kade-Engine/patchnotes/version.downloadMe");
+		// 		var returnedData:Array<String> = [];
 				
-				http.onData = function (data:String)
-				{
-					returnedData[0] = data.substring(0, data.indexOf(';'));
-					returnedData[1] = data.substring(data.indexOf('-'), data.length);
-				  	if (!MainMenuState.kadeEngineVer.contains(returnedData[0].trim()) && !OutdatedSubState.leftState && MainMenuState.nightly == "")
-					{
-						trace('outdated lmao! ' + returnedData[0] + ' != ' + MainMenuState.kadeEngineVer);
-						OutdatedSubState.needVer = returnedData[0];
-						OutdatedSubState.currChanges = returnedData[1];
-						FlxG.switchState(new OutdatedSubState());
-					}
-					else
-					{
-						FlxG.switchState(new MainMenuState());
-					}
-				}
+		// 		http.onData = function (data:String)
+		// 		{
+		// 			returnedData[0] = data.substring(0, data.indexOf(';'));
+		// 			returnedData[1] = data.substring(data.indexOf('-'), data.length);
+		// 		  	if (!MainMenuState.kadeEngineVer.contains(returnedData[0].trim()) && !OutdatedSubState.leftState && MainMenuState.nightly == "")
+		// 			{
+		// 				trace('outdated lmao! ' + returnedData[0] + ' != ' + MainMenuState.kadeEngineVer);
+		// 				OutdatedSubState.needVer = returnedData[0];
+		// 				OutdatedSubState.currChanges = returnedData[1];
+		// 				FlxG.switchState(new OutdatedSubState());
+		// 			}
+		// 			else
+		// 			{
+		// 				FlxG.switchState(new MainMenuState());
+		// 			}
+		// 		}
 				
-				http.onError = function (error) {
-				  trace('error: $error');
-				  FlxG.switchState(new MainMenuState()); // fail but we go anyway
-				}
+		// 		http.onError = function (error) {
+		// 		  trace('error: $error');
+		// 		}
 				
-				http.request();
-			});
-			// FlxG.sound.play(Paths.music('titleShoot'), 0.7);
+		// 		http.request();
+		// 	});
+		// 	// FlxG.sound.play(Paths.music('titleShoot'), 0.7);
+		// }
+
+		new FlxTimer().start(2, function(tmr:FlxTimer){FlxG.switchState(new MainMenuState());});
 		}
 
 		if (pressedEnter && !skippedIntro && initialized)
@@ -410,8 +424,11 @@ class TitleState extends MusicBeatState
 		switch (curBeat)
 		{
 			case 2:
-				createCoolText(['The Cool Pals:','literallynoone', 'PunkinMike', 'tictacto', 'TKTems', 'TentaRJ']);
+				createCoolText(['Author:','tictacto']);
 			credTextShit.visible = true;
+			case 3:
+				deleteCoolText();
+				createCoolText(['Helpers Pals:','tictacto','literallynoone', 'PunkinMike', 'TKTems', 'TentaRJ']);
 			case 4:
 				deleteCoolText();
 			case 5:

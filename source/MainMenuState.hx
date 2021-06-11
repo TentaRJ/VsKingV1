@@ -1,5 +1,6 @@
 package;
 
+import flixel.system.FlxAssets.GraphicLogo;
 import Controls.KeyboardScheme;
 import flixel.FlxG;
 import flixel.tweens.FlxTween;
@@ -32,6 +33,7 @@ class MainMenuState extends MusicBeatState
 	var menuItems:FlxTypedGroup<FlxSprite>;
 
 	var logoBl:FlxSprite;
+	var ghLogo:FlxSprite;
 	var stickerFunny:FlxSprite;
 
 	#if !switch
@@ -47,6 +49,10 @@ class MainMenuState extends MusicBeatState
 	public static var nightly:String = "";
 
 	public static var kadeEngineVer:String = "1.4.2" + nightly;
+	public static var ghUpdateText:FlxText;
+	public static var kingVer:String = "1.1.1";
+	public static var kingTest:Bool = false;
+	public static var versionResult:String;
 	public static var gameVer:String = "0.2.7.1";
 
 	var magenta:FlxSprite;
@@ -116,9 +122,9 @@ class MainMenuState extends MusicBeatState
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 
-		logoBl = new FlxSprite(1299, 260);
+		logoBl = new FlxSprite(1299, 120);
 		logoBl.scrollFactor.set(0,0);
-		logoBl.scale.set(0.6, 0.6);
+		logoBl.scale.set(0.65, 0.65);
 		logoBl.frames = Paths.getSparrowAtlas('logoBumpin', 'preload');
 		logoBl.antialiasing = true;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24);
@@ -127,7 +133,14 @@ class MainMenuState extends MusicBeatState
 		logoBl.updateHitbox();
 		add(logoBl);
 
-		stickerFunny = new FlxSprite(1299, 260).loadGraphic(Paths.image('stickerFunnyPublic', 'preload'));
+		ghLogo = new FlxSprite(1299, 120).loadGraphic(Paths.image('githubLogo', 'preload'));
+		ghLogo.scrollFactor.set(0,0);
+		ghLogo.scale.set(0.2, 0.2);
+		ghLogo.scrollFactor.set(0, 0.25);
+		ghLogo.updateHitbox();
+		add(ghLogo);
+
+		stickerFunny = new FlxSprite(1299, 320).loadGraphic(Paths.image('stickerFunnyPublic', 'preload'));
 		stickerFunny.scrollFactor.set(0,0);
 		stickerFunny.antialiasing=true;
 		stickerFunny.scrollFactor.set(0, 0.25);
@@ -137,11 +150,57 @@ class MainMenuState extends MusicBeatState
 
 		new FlxTimer().start(0.29, function(swagTimer:FlxTimer)
 		{
-			// FlxTween.tween(menuItems,{x:20, y:60}, 1, {ease:FlxEase.expoInOut});
-
 			FlxTween.tween(logoBl,{x:699, y:120}, 1, {ease:FlxEase.expoInOut});
 			new FlxTimer().start(0.2, function(swagTimer:FlxTimer){
-				FlxTween.tween(stickerFunny,{x:999, y:120}, 1, {ease:FlxEase.expoInOut});
+				// FlxTween.tween(stickerFunny,{x:999, y:120}, 1, {ease:FlxEase.expoInOut});
+				new FlxTimer().start(0.89, function(tmr:FlxTimer)
+				{
+					#if debug
+					versionResult="Debug Mode! Not gonna check for updates!";
+					#elseif !html
+					var http = new haxe.Http("https://raw.githubusercontent.com/TentaRJ/VsKingV1/update-testing/kingVersion.downloadMe");
+					var returnedData:Array<String> = [];
+					
+					http.onData = function (data:String)
+					{
+						returnedData[0] = data.substring(0, data.indexOf(';'));
+						returnedData[1] = data.substring(data.indexOf('-'), data.length);
+
+						if (MainMenuState.kingTest)
+						{
+							trace("test build!");
+							versionResult="This version is a test of the build " + kingVer + "! Please report any issues to Github!";
+						}
+						else if (!MainMenuState.kingVer.contains(returnedData[0].trim()) && !MainMenuState.kingTest)
+						{
+							trace('outdated lmao! ' + returnedData[0] + ' != ' + kingVer);
+							trace(returnedData[1]);
+							versionResult="Version " + returnedData[0] + " is available! Check the mod repository in options to see the new changes!";
+							FlxTween.tween(logoBl,{x:1499}, 1, {ease:FlxEase.expoInOut});
+							FlxTween.tween(ghLogo,{x:799, y:190}, 1, {ease:FlxEase.expoInOut});
+						}
+						else
+						{
+							versionResult="No updates found! Your version is " + kingVer + "!";
+						}
+
+					}
+					http.onError = function (error) {
+						trace('error: $error');
+						trace("They are probably offline lmaoooooo");
+						versionResult="Could not check for updates!";
+					}
+
+					http.request();
+					#end
+
+					ghUpdateText = new FlxText(1299, FlxG.height - 48, 0, versionResult, 16);
+					ghUpdateText.scrollFactor.set();
+					ghUpdateText.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					add(ghUpdateText);
+
+					FlxTween.tween(ghUpdateText,{x:5}, 1, {ease:FlxEase.expoOut});
+				});
 			});
 		});
 
@@ -234,7 +293,8 @@ class MainMenuState extends MusicBeatState
 					selectedSomethin = true;
 					FlxG.sound.play(Paths.sound('confirmMenu'));
 					
-					FlxTween.tween(logoBl,{x:1499, y:320}, 1, {ease:FlxEase.expoInOut});
+					FlxTween.tween(logoBl,{x:1499}, 1, {ease:FlxEase.expoInOut});
+					FlxTween.tween(ghLogo,{x:1499}, 1, {ease:FlxEase.expoInOut});
 					FlxTween.tween(stickerFunny,{x:1499, y:120}, 1, {ease:FlxEase.expoInOut});
 					new FlxTimer().start(1, function(swagTimer:FlxTimer){
 						remove(logoBl);

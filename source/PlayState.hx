@@ -110,6 +110,7 @@ class PlayState extends MusicBeatState
 	public static var gf:Character;
 	public static var boyfriend:Boyfriend;
 	public static var king:Character;
+	public static var dumpy:FlxSprite;
 	public var notes:FlxTypedGroup<Note>;
 	private var unspawnNotes:Array<Note> = [];
 
@@ -580,11 +581,12 @@ class PlayState extends MusicBeatState
 		if (SONG.song.toLowerCase()=="portal-potty")
 		{
 			gf.visible = false;
-			var dumpy:FlxSprite = new FlxSprite(gf.x, gf.y + 200);
+			dumpy = new FlxSprite(gf.x, gf.y + 200);
 			dumpy.frames = Paths.getSparrowAtlas("dontask", "weekcustom");
 			dumpy.animation.addByPrefix("dumpyFunny", "dumpy0", 24, true);
 			dumpy.animation.play("dumpyFunny", true);
 			dumpy.scale.set(0.8, 0.8);
+			dumpy.flipX = true;
 			dumpy.updateHitbox();
 			add(dumpy);
 
@@ -707,7 +709,7 @@ class PlayState extends MusicBeatState
 		add(healthBar);
 
 		// Add Kade Engine watermark
-		kadeEngineWatermark = new FlxText(4,healthBarBG.y + 50,0,SONG.song + " " + (storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy") + (Main.watermarks ? " - KE " + MainMenuState.kadeEngineVer : ""), 16);
+		kadeEngineWatermark = new FlxText(4,healthBarBG.y + 50,0,SONG.song + " " + (storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy") + (Main.watermarks ? " - KE " + MainMenuState.kadeEngineVer + " - King Version" + MainMenuState.kingVer : ""), 16);
 		kadeEngineWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		kadeEngineWatermark.scrollFactor.set();
 		add(kadeEngineWatermark);
@@ -737,7 +739,7 @@ class PlayState extends MusicBeatState
 		botPlayState.setFormat(Paths.font("vcr.ttf"), 42, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		botPlayState.scrollFactor.set();
 		
-		// if(FlxG.save.data.botplay && !loadRep) add(botPlayState);
+		if(FlxG.save.data.botplay && !loadRep) add(botPlayState);
 
 		iconP1 = new HealthIcon(SONG.player1, true);
 		iconP1.y = healthBar.y - (iconP1.height / 2);
@@ -2142,6 +2144,14 @@ class PlayState extends MusicBeatState
 								health -= 0.0182;
 							}
 						}
+						
+						// if(SONG.song.toLowerCase()=="portal-potty")
+						// 	{
+						// 		dumpy.flipX = !dumpy.flipX;
+						// 		#if debug
+						// 		trace("flip");
+						// 		#end
+						// 	}
 
 						daNote.kill();
 						notes.remove(daNote, true);
@@ -3262,6 +3272,14 @@ class PlayState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
+
+		if(SONG.song.toLowerCase()=="portal-potty")
+		{
+			dumpy.flipX = !dumpy.flipX;
+			#if debug
+			trace("flip");
+			#end
+		}
 
 		if (generatedMusic)
 		{
