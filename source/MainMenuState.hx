@@ -176,7 +176,7 @@ class MainMenuState extends MusicBeatState
 						{
 							trace('outdated lmao! ' + returnedData[0] + ' != ' + kingVer);
 							trace(returnedData[1]);
-							versionResult="Version " + returnedData[0] + "is available! Check the Update tab in options to see the new changes!";
+							versionResult="Version " + returnedData[0] + "is available! Check the repository in options to see the new changes!";
 							FlxTween.tween(logoBl,{x:1499}, 1, {ease:FlxEase.expoInOut});
 							FlxTween.tween(ghLogo,{x:799, y:190}, 1, {ease:FlxEase.expoInOut});
 						}
@@ -195,7 +195,7 @@ class MainMenuState extends MusicBeatState
 					}
 					http.onError = function (error) {
 						trace('error: $error');
-						versionResult="Error when checking for updates! Your version is " + kingVer + "!";
+						trace("They are probably offline lmaoooooo");
 					}
 
 					http.request();
@@ -294,6 +294,7 @@ class MainMenuState extends MusicBeatState
 					FlxG.sound.play(Paths.sound('confirmMenu'));
 					
 					FlxTween.tween(logoBl,{x:1499}, 1, {ease:FlxEase.expoInOut});
+					FlxTween.tween(ghLogo,{x:1499}, 1, {ease:FlxEase.expoInOut});
 					FlxTween.tween(stickerFunny,{x:1499, y:120}, 1, {ease:FlxEase.expoInOut});
 					new FlxTimer().start(1, function(swagTimer:FlxTimer){
 						remove(logoBl);

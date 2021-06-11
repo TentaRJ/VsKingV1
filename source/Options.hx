@@ -626,6 +626,27 @@ class Reset extends Option
 	private override function updateDisplay():String
 		return "Reset?";
 }
+class Repository extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+
+	public override function press():Bool
+	{
+		#if linux
+		Sys.command('/usr/bin/xdg-open', ["https://github.com/TentaRJ/VsKingV1", "&"]);
+		#else
+		FlxG.openURL('https://github.com/TentaRJ/VsKingV1');
+		#end
+		trace("Opening Repo!");
+		return true ;
+	}
+	private override function updateDisplay():String
+		return "Open Repository";
+}
 // class Cutscenes extends Option
 // {
 // 	public function new(desc:String)

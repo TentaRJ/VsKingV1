@@ -56,6 +56,11 @@ class OptionsMenu extends MusicBeatState
 			new BotPlay("Showcase your charts and mods with autoplay.")
 		]),
 
+		new OptionCatagory("Github", [
+			// new Updates("Check for updates"),
+			new Repository("Open the Repository for this mod.")
+		]),
+
 		new OptionCatagory("Mod Specific", [
 			// new Cutscenes("Enable or disable cutscenes for low end computers."),
 			new Reset("Reset all of this mod's data in case something happened.")
