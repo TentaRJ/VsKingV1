@@ -48,6 +48,7 @@ class TitleState extends MusicBeatState
 	var curWacky:Array<String> = [];
 
 	var wackyImage:FlxSprite;
+	var bg:FlxSprite;
 
 	static public var _kingsave:FlxSave;
 
@@ -174,10 +175,21 @@ class TitleState extends MusicBeatState
 		Conductor.changeBPM(102);
 		persistentUpdate = true;
 
-		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-		// bg.antialiasing = true;
-		// bg.setGraphicSize(Std.int(bg.width * 0.6));
-		// bg.updateHitbox();
+		if (MainMenuState.kingTest)
+		{
+			bg = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.GRAY);
+			// bg.antialiasing = true;
+			// bg.setGraphicSize(Std.int(bg.width * 0.6));
+			// bg.updateHitbox();
+		}
+		else
+		{
+			bg= new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+			// bg.antialiasing = true;
+			// bg.setGraphicSize(Std.int(bg.width * 0.6));
+			// bg.updateHitbox();
+		}
+
 		add(bg);
 
 		logoBl = new FlxSprite(-150, -100);
@@ -412,8 +424,11 @@ class TitleState extends MusicBeatState
 		switch (curBeat)
 		{
 			case 2:
-				createCoolText(['The Cool Pals:','literallynoone', 'PunkinMike', 'tictacto', 'TKTems', 'TentaRJ']);
+				createCoolText(['Author:','tictacto']);
 			credTextShit.visible = true;
+			case 3:
+				deleteCoolText();
+				createCoolText(['Helpers Pals:','tictacto','literallynoone', 'PunkinMike', 'TKTems', 'TentaRJ']);
 			case 4:
 				deleteCoolText();
 			case 5:

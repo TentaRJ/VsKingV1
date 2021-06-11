@@ -58,7 +58,8 @@ class OptionsMenu extends MusicBeatState
 
 		new OptionCatagory("Github", [
 			// new Updates("Check for updates"),
-			new Repository("Open the Repository for this mod.")
+			new Repository("Open the Repository for this mod using your default browser."),
+			new KadeRepository("Open the Repository for Kade Engine using your default browser.")
 		]),
 
 		new OptionCatagory("Mod Specific", [

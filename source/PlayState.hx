@@ -110,6 +110,7 @@ class PlayState extends MusicBeatState
 	public static var gf:Character;
 	public static var boyfriend:Boyfriend;
 	public static var king:Character;
+	public static var dumpy:FlxSprite;
 	public var notes:FlxTypedGroup<Note>;
 	private var unspawnNotes:Array<Note> = [];
 
@@ -580,11 +581,12 @@ class PlayState extends MusicBeatState
 		if (SONG.song.toLowerCase()=="portal-potty")
 		{
 			gf.visible = false;
-			var dumpy:FlxSprite = new FlxSprite(gf.x, gf.y + 200);
+			dumpy = new FlxSprite(gf.x, gf.y + 200);
 			dumpy.frames = Paths.getSparrowAtlas("dontask", "weekcustom");
 			dumpy.animation.addByPrefix("dumpyFunny", "dumpy0", 24, true);
 			dumpy.animation.play("dumpyFunny", true);
 			dumpy.scale.set(0.8, 0.8);
+			dumpy.flipX = true;
 			dumpy.updateHitbox();
 			add(dumpy);
 
@@ -2142,6 +2144,14 @@ class PlayState extends MusicBeatState
 								health -= 0.0182;
 							}
 						}
+						
+						// if(SONG.song.toLowerCase()=="portal-potty")
+						// 	{
+						// 		dumpy.flipX = !dumpy.flipX;
+						// 		#if debug
+						// 		trace("flip");
+						// 		#end
+						// 	}
 
 						daNote.kill();
 						notes.remove(daNote, true);
@@ -3262,6 +3272,14 @@ class PlayState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
+
+		if(SONG.song.toLowerCase()=="portal-potty")
+		{
+			dumpy.flipX = !dumpy.flipX;
+			#if debug
+			trace("flip");
+			#end
+		}
 
 		if (generatedMusic)
 		{

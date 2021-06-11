@@ -645,7 +645,28 @@ class Repository extends Option
 		return true ;
 	}
 	private override function updateDisplay():String
-		return "Open Repository";
+		return "Vs King Mod Repo";
+}
+class KadeRepository extends Option
+{
+	public function new(desc:String)
+	{
+		super();
+		description = desc;
+	}
+
+	public override function press():Bool
+	{
+		#if linux
+		Sys.command('/usr/bin/xdg-open', ["https://github.com/KadeDev/Kade-Engine", "&"]);
+		#else
+		FlxG.openURL('https://github.com/KadeDev/Kade-Engine');
+		#end
+		trace("Opening Repo!");
+		return true ;
+	}
+	private override function updateDisplay():String
+		return "Kade Engine Repo";
 }
 // class Cutscenes extends Option
 // {

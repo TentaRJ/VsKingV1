@@ -49,9 +49,9 @@ class MainMenuState extends MusicBeatState
 	public static var nightly:String = "";
 
 	public static var kadeEngineVer:String = "1.4.2" + nightly;
-	public static var kingVer:String = "1.1.0";
+	public static var ghUpdateText:FlxText;
+	public static var kingVer:String = "1.1.1";
 	public static var kingTest:Bool = false;
-	public static var seenBefore:Bool = false;
 	public static var versionResult:String;
 	public static var gameVer:String = "0.2.7.1";
 
@@ -153,12 +153,11 @@ class MainMenuState extends MusicBeatState
 			FlxTween.tween(logoBl,{x:699, y:120}, 1, {ease:FlxEase.expoInOut});
 			new FlxTimer().start(0.2, function(swagTimer:FlxTimer){
 				// FlxTween.tween(stickerFunny,{x:999, y:120}, 1, {ease:FlxEase.expoInOut});
-				new FlxTimer().start(1.4, function(tmr:FlxTimer)
+				new FlxTimer().start(0.89, function(tmr:FlxTimer)
 				{
-					if (!seenBefore)
-					{
-					seenBefore = true;
-
+					#if debug
+					versionResult="Debug Mode! Not gonna check for updates!";
+					#elseif !html
 					var http = new haxe.Http("https://raw.githubusercontent.com/TentaRJ/VsKingV1/update-testing/kingVersion.downloadMe");
 					var returnedData:Array<String> = [];
 					
@@ -176,30 +175,31 @@ class MainMenuState extends MusicBeatState
 						{
 							trace('outdated lmao! ' + returnedData[0] + ' != ' + kingVer);
 							trace(returnedData[1]);
-							versionResult="Version " + returnedData[0] + "is available! Check the repository in options to see the new changes!";
+							versionResult="Version " + returnedData[0] + " is available! Check the mod repository in options to see the new changes!";
 							FlxTween.tween(logoBl,{x:1499}, 1, {ease:FlxEase.expoInOut});
 							FlxTween.tween(ghLogo,{x:799, y:190}, 1, {ease:FlxEase.expoInOut});
 						}
 						else
 						{
-							versionResult="No updates found! Your version is" + kingVer + "!";
+							versionResult="No updates found! Your version is " + kingVer + "!";
 						}
-
-						var ghUpdateText:FlxText = new FlxText(1299, FlxG.height - 48, 0, versionResult);
-						ghUpdateText.scrollFactor.set();
-						ghUpdateText.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-						add(ghUpdateText);
-	
-						FlxTween.tween(ghUpdateText,{x:5}, 1, {ease:FlxEase.expoOut});
 
 					}
 					http.onError = function (error) {
 						trace('error: $error');
 						trace("They are probably offline lmaoooooo");
+						versionResult="Could not check for updates!";
 					}
 
 					http.request();
-					}	
+					#end
+
+					ghUpdateText = new FlxText(1299, FlxG.height - 48, 0, versionResult, 16);
+					ghUpdateText.scrollFactor.set();
+					ghUpdateText.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					add(ghUpdateText);
+
+					FlxTween.tween(ghUpdateText,{x:5}, 1, {ease:FlxEase.expoOut});
 				});
 			});
 		});
