@@ -50,7 +50,7 @@ class MainMenuState extends MusicBeatState
 
 	public static var kadeEngineVer:String = "1.4.2" + nightly;
 	public static var ghUpdateText:FlxText;
-	public static var kingVer:String = "1.1.1";
+	public static var kingVer:String = "1.1.2";
 	public static var kingTest:Bool = false;
 	public static var versionResult:String;
 	public static var gameVer:String = "0.2.7.1";
@@ -158,7 +158,7 @@ class MainMenuState extends MusicBeatState
 					#if debug
 					versionResult="Debug Mode! Not gonna check for updates!";
 					#elseif !html
-					var http = new haxe.Http("https://raw.githubusercontent.com/TentaRJ/VsKingV1/update-testing/kingVersion.downloadMe");
+					var http = new haxe.Http("https://raw.githubusercontent.com/TentaRJ/VsKingV1/main-but-not-main-as-well/kingVersion.downloadMe");
 					var returnedData:Array<String> = [];
 					
 					http.onData = function (data:String)
@@ -171,9 +171,9 @@ class MainMenuState extends MusicBeatState
 							trace("test build!");
 							versionResult="This version is a test of the build " + kingVer + "! Please report any issues to Github!";
 						}
-						else if (!MainMenuState.kingVer.contains(returnedData[0].trim()) && !MainMenuState.kingTest)
+						else if (MainMenuState.kingVer > returnedData[0].trim() && !MainMenuState.kingTest)
 						{
-							trace('outdated lmao! ' + returnedData[0] + ' != ' + kingVer);
+							trace('outdated lmao! ' + returnedData[0] + ' > ' + kingVer);
 							trace(returnedData[1]);
 							versionResult="Version " + returnedData[0] + " is available! Check the mod repository in options to see the new changes!";
 							FlxTween.tween(logoBl,{x:1499}, 1, {ease:FlxEase.expoInOut});
